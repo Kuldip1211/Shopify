@@ -187,8 +187,26 @@
         "text_color": "#444444",
         "button_text": "Learn More",
         "button_link": "",
-        "button_bg_color": "#2E7D32",
+        "button_bg_color": "#2e7d32",
         "button_text_color": "#ffffff"
+      }
+    },
+    "newsletter_E6U9Eq": {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": {
+        "bg_color": "#f9f9f9",
+        "heading": "Stay Updated with Our Latest Offers!",
+        "subheading": "Join our newsletter and get exclusive updates, offers, and inspiration straight to your inbox.",
+        "heading_color": "#111111",
+        "text_color": "#555555",
+        "placeholder_text": "Enter your email address",
+        "button_text": "Subscribe",
+        "button_bg_color": "#2E7D32",
+        "button_hover_color": "#1B5E20",
+        "button_text_color": "#ffffff",
+        "circle_color": "#4CAF50",
+        "success_message": "Thank you for subscribing!"
       }
     }
   },
@@ -197,6 +215,7 @@
     "bestseller",
     "why_choose_us_pwckLW",
     "testimonials_8Wnh4H",
-    "about_us_section_XRMrmh"
+    "about_us_section_XRMrmh",
+    "newsletter_E6U9Eq"
   ]
 }
