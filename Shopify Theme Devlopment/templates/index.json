@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "hero_image": "shopify://shop_images/for-you-shelf.jpg",
+        "overlay_opacity": 0.4,
+        "hero_title": "Fresh & Organic Fruits Delivered To You",
+        "title_color": "#ffffff",
+        "hero_subtitle": "Shop from our hand-picked selection of the freshest produce grown naturally.",
+        "subtitle_color": "#f1f1f1",
+        "show_button": true,
+        "button_text": "Shop Now",
+        "button_link": "shopify://collections/all",
+        "button_bg_color": "#2ecc71",
+        "button_text_color": "#ffffff",
+        "text_alignment": "center"
+      }
+    },
+    "bestseller": {
+      "type": "bestseller",
+      "settings": {
+        "title": "Our Featured Collection",
+        "title_color": "#333333",
+        "collection": "men",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "button_text": "View All",
+        "button_text_color": "#2ecc71",
+        "text_alignment": "center",
+        "bg_color": "#f9f9f9"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "bestseller"
+  ]
+}
