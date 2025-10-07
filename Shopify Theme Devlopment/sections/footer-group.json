@@ -1,0 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "bg_color": "#111111",
+        "text_color": "#cccccc",
+        "heading_color": "#ffffff",
+        "accent_color": "#4caf50",
+        "store_name": "Shiv Gardening",
+        "store_description": "We provide premium quality plants, seeds, and gardening tools to help you create your dream garden.",
+        "store_address": "123 Green Street, Ahmedabad, India",
+        "store_phone": "+91 98765 43210",
+        "store_email": "support@shivgardening.com",
+        "facebook_image": "shopify://shop_images/facebook.png",
+        "facebook_url": "",
+        "instagram_image": "shopify://shop_images/instagram.png",
+        "instagram_url": "",
+        "twitter_image": "shopify://shop_images/logos.png",
+        "twitter_url": "",
+        "linkedin_image": "shopify://shop_images/linkedin.png",
+        "linkedin_url": "",
+        "youtube_image": "shopify://shop_images/youtube.png",
+        "youtube_url": ""
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
