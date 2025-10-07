@@ -1,0 +1,192 @@
+<!-- 📁 sections/header.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<nav class="site-header">
+  <div class="header-container">
+    
+    <!-- 🏷️ Left: Shop Title -->
+    <div class="logo">
+      <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+    </div>
+
+    <!-- 🧭 Center: Navigation Links -->
+    <ul class="nav-links" id="navLinks">
+        {% for link in linklists.main-menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <!-- 🛒 Right: Profile & Cart Icons -->
+    <div class="header-icons">
+      <a href="/account" class="icon-link">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M5.5 21a7.5 7.5 0 0 1 13 0"/>
+        </svg>
+      </a>
+      <a href="/cart" class="icon-link">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* ✅ Basic Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  nav.site-header {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* 🏷️ Logo */
+  .logo a {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+  }
+
+  /* 🧭 Navigation */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: #2ecc71;
+  }
+
+  /* 🛒 Icons */
+  .header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .icon-link {
+    color: #333;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+
+  .icon-link:hover {
+    color: #2ecc71;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* 🍔 Hamburger Menu (mobile only) */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 900px) {
+    .nav-links {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      display: none;
+      border-top: 1px solid #eaeaea;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .header-container {
+      padding: 15px 20px;
+    }
+  }
+
+  /* 🍔 Hamburger Animation */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+</style>
+
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("navLinks");
+
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active");
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Default Header"
+    }
+  ]
+}
+{% endschema %}

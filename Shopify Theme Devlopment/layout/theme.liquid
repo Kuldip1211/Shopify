@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+
+    <!-- Shopify Liquid placeholder for additional scripts, styles, and meta tags -->
+    {{ content_for_header }}
+  </head>
+  <body>
+
+    <!-- for Navbar -->
+    {% sections 'header-group' %}
+
+    <!-- Shopify Liquid placeholder for the main page content -->
+    {{ content_for_layout }}
+
+    <!-- Optional: You can add a footer or scripts here -->
+    <footer>
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

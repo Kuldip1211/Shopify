@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
+    "anoucmentbar_XiJaYV": {
+      "type": "anoucmentbar",
+      "name": "Default Announcement Bar",
+      "settings": {
+        "announcement_text": "🎉 Free shipping on orders over ₹500!",
+        "show_button": true,
+        "button_text": "Shop Now",
+        "button_link": "shopify://collections/all",
+        "bg_color": "#2ecc71",
+        "text_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#2ecc71"
+      }
+    }
+  },
+  "order": [
+    "anoucmentbar_XiJaYV",
+    "header"
+  ]
+}

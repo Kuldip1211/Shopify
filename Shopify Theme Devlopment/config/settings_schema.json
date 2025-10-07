@@ -1,0 +1,11 @@
+[
+    {
+        "name" : "theme_info",
+        "theme_name": "Theme from scratch",
+        "theme_author": "Kuldeep Chudasama",
+        "theme_version": "1.0.0",
+        "theme_documentation" : "A Custome Theme built from scratch",
+        "theme_documentation_url": "",
+        "theme_support_url": ""
+    }
+]
