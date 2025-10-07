@@ -140,43 +140,36 @@
     "about_us_section_XRMrmh": {
       "type": "about-us-section",
       "blocks": {
-        "image_atTpNR": {
+        "image_8PpdJU": {
           "type": "image",
           "settings": {
             "gallery_image": "shopify://shop_images/golden-autumn-leaves.jpg"
           }
         },
-        "image_6p84Ln": {
+        "image_mRAifG": {
           "type": "image",
           "settings": {
-            "gallery_image": "shopify://shop_images/palm-trees-sky.jpg"
+            "gallery_image": "shopify://shop_images/nature-mountains-flower-landscape-adventure.jpg"
           }
         },
-        "image_BeCM4i": {
-          "type": "image",
-          "settings": {
-            "gallery_image": "shopify://shop_images/thin-plant-stems-in-sun.jpg"
-          }
-        },
-        "image_nthYzN": {
+        "image_EUbgq9": {
           "type": "image",
           "settings": {
             "gallery_image": "shopify://shop_images/waterfall-by-ruins.jpg"
           }
         },
-        "image_Cj6na3": {
+        "image_9nr6Ly": {
           "type": "image",
           "settings": {
-            "gallery_image": "shopify://shop_images/nature-mountains-flower-landscape-adventure.jpg"
+            "gallery_image": "shopify://shop_images/palm-trees-sky.jpg"
           }
         }
       },
       "block_order": [
-        "image_atTpNR",
-        "image_6p84Ln",
-        "image_BeCM4i",
-        "image_nthYzN",
-        "image_Cj6na3"
+        "image_8PpdJU",
+        "image_mRAifG",
+        "image_EUbgq9",
+        "image_9nr6Ly"
       ],
       "name": "About Us with Image Collage",
       "settings": {
@@ -217,8 +210,8 @@
         "heading": "Get in Touch",
         "subheading": "We’d love to hear from you! Fill out the form below or visit us at our store location.",
         "button_text": "Send Message",
-        "button_bg_color": "#2E7D32",
-        "button_hover_color": "#1B5E20",
+        "button_bg_color": "#2e7d32",
+        "button_hover_color": "#1b5e20",
         "button_text_color": "#ffffff",
         "heading_color": "#111111",
         "text_color": "#555555",

@@ -1,9 +1,9 @@
-<!-- 📁 sections/featured-collection.liquid -->
+<!--  sections/featured-collection.liquid -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <section class="featured-collection">
   <div class="collection-container">
-    <!-- 🏷️ Section Title -->
+    <!--  Section Title -->
     <div class="collection-header" style="text-align: {{ section.settings.text_alignment }};">
       <h2 class="collection-title" style="color: {{ section.settings.title_color }};">
         {{ section.settings.title }}
@@ -16,7 +16,7 @@
       {% endif %}
     </div>
 
-    <!-- 🛍️ Collection Grid -->
+    <!--  Collection Grid -->
     {% if section.settings.collection != blank %}
       {% assign collection = collections[section.settings.collection] %}
       <div class="collection-grid">

@@ -17,10 +17,10 @@
     {{ content_for_layout }}
 
     <!-- footer -->
-    {% sections 'footer-group' %}
     <!-- Optional: You can add a footer or scripts here -->
     <footer>
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      {% sections 'footer-group' %}
+      
     </footer>
   </body>
 </html>
