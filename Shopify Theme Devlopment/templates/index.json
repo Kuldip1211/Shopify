@@ -39,10 +39,164 @@
         "text_alignment": "center",
         "bg_color": "#f9f9f9"
       }
+    },
+    "why_choose_us_pwckLW": {
+      "type": "why-choose-us",
+      "blocks": {
+        "feature_9KwaGc": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/leaf.png",
+            "icon": "fa-solid fa-leaf",
+            "title": "Eco-Friendly Products",
+            "description": "We care for nature and offer sustainable products."
+          }
+        },
+        "feature_C4Jerq": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/fast-delivery.png",
+            "icon": "fa-solid fa-truck-fast",
+            "title": "Fast Delivery",
+            "description": "We ensure quick and reliable delivery for all orders."
+          }
+        },
+        "feature_xmbc7M": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/customer-support.png",
+            "icon": "fa-solid fa-headset",
+            "title": "24/7 Support",
+            "description": "Our support team is always available to assist you."
+          }
+        }
+      },
+      "block_order": [
+        "feature_9KwaGc",
+        "feature_C4Jerq",
+        "feature_xmbc7M"
+      ],
+      "name": "Why Choose Us (With Icons or Images)",
+      "settings": {
+        "main_title": "Why Choose Us",
+        "subtitle": "We provide the best quality, service, and value for your needs.",
+        "title_color": "#333333",
+        "subtitle_color": "#555555",
+        "icon_color": "#2ecc71",
+        "icon_size": 50,
+        "bg_color": "#f9f9f9",
+        "text_alignment": "center"
+      }
+    },
+    "testimonials_8Wnh4H": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_FM9CeR": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/amit_patel.jpg",
+            "customer_name": "Amit Patel",
+            "customer_role": "Regular Buyer",
+            "message": "High-quality and super fresh products every time!",
+            "rating": 5
+          }
+        },
+        "testimonial_HYhRjF": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/sneha.jpg",
+            "customer_name": "Sneha Mehta",
+            "customer_role": "Verified User",
+            "message": "Very satisfied with the service and packaging!",
+            "rating": 4
+          }
+        },
+        "testimonial_yajbAU": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/rahul.jpg",
+            "customer_name": "Rahul Singh",
+            "customer_role": "Returning Customer",
+            "message": "Quick delivery and premium quality. Love it!",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_FM9CeR",
+        "testimonial_HYhRjF",
+        "testimonial_yajbAU"
+      ],
+      "name": "Testimonials Carousel",
+      "settings": {
+        "main_title": "Our Happy Customers",
+        "subtitle": "See what people say about us",
+        "title_color": "#333333",
+        "subtitle_color": "#666666",
+        "bg_color": "#fafafa",
+        "text_alignment": "center"
+      }
+    },
+    "about_us_section_XRMrmh": {
+      "type": "about-us-section",
+      "blocks": {
+        "image_atTpNR": {
+          "type": "image",
+          "settings": {
+            "gallery_image": "shopify://shop_images/golden-autumn-leaves.jpg"
+          }
+        },
+        "image_6p84Ln": {
+          "type": "image",
+          "settings": {
+            "gallery_image": "shopify://shop_images/palm-trees-sky.jpg"
+          }
+        },
+        "image_BeCM4i": {
+          "type": "image",
+          "settings": {
+            "gallery_image": "shopify://shop_images/thin-plant-stems-in-sun.jpg"
+          }
+        },
+        "image_nthYzN": {
+          "type": "image",
+          "settings": {
+            "gallery_image": "shopify://shop_images/waterfall-by-ruins.jpg"
+          }
+        },
+        "image_Cj6na3": {
+          "type": "image",
+          "settings": {
+            "gallery_image": "shopify://shop_images/nature-mountains-flower-landscape-adventure.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_atTpNR",
+        "image_6p84Ln",
+        "image_BeCM4i",
+        "image_nthYzN",
+        "image_Cj6na3"
+      ],
+      "name": "About Us with Image Collage",
+      "settings": {
+        "bg_color": "#ffffff",
+        "heading": "About Our Journey",
+        "description": "At Shiv Gardening, we believe in nurturing nature’s beauty. From lush plants to organic gardening essentials, our journey is rooted in sustainability, growth, and love for the environment. We take pride in delivering the freshness and care that your garden deserves.",
+        "heading_color": "#111111",
+        "text_color": "#444444",
+        "button_text": "Learn More",
+        "button_link": "",
+        "button_bg_color": "#2E7D32",
+        "button_text_color": "#ffffff"
+      }
     }
   },
   "order": [
     "hero",
-    "bestseller"
+    "bestseller",
+    "why_choose_us_pwckLW",
+    "testimonials_8Wnh4H",
+    "about_us_section_XRMrmh"
   ]
 }

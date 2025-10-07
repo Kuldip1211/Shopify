@@ -1,0 +1,254 @@
+<!-- 📁 sections/why-choose-us.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<section class="why-choose-us" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    
+    <!-- 🏷️ Section Header -->
+    <div class="section-header" style="text-align: {{ section.settings.text_alignment }};">
+      <h2 class="section-title" style="color: {{ section.settings.title_color }};">{{ section.settings.main_title }}</h2>
+      <p class="section-subtitle" style="color: {{ section.settings.subtitle_color }};">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <!-- 💎 Features Grid -->
+    <div class="features-grid">
+      {% for block in section.blocks %}
+        <div class="feature-card">
+
+          <!-- 🖼️ Image has priority; fallback to icon -->
+          {% if block.settings.image != blank %}
+            <div class="feature-image">
+              <img src="{{ block.settings.image | image_url: width: 300 }}" alt="{{ block.settings.title }}">
+            </div>
+          {% elsif block.settings.icon != blank %}
+            <div class="feature-icon" style="color: {{ section.settings.icon_color }}; font-size: {{ section.settings.icon_size }}px;">
+              <i class="{{ block.settings.icon }}"></i>
+            </div>
+          {% endif %}
+
+          <!-- 📝 Content -->
+          <h3 class="feature-title">{{ block.settings.title }}</h3>
+          <p class="feature-description">{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 🌟 General Styles */
+  .why-choose-us {
+    padding: 70px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  /* 💎 Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .feature-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  /* 🖼️ Image/Icon Styles */
+  .feature-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+
+  .feature-icon {
+    margin-bottom: 20px;
+  }
+
+  /* 📝 Text Styles */
+  .feature-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .feature-description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.8rem;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+    }
+    .feature-card {
+      padding: 20px;
+    }
+  }
+</style>
+
+<!-- 🌈 Font Awesome (for icons) -->
+<script src="https://kit.fontawesome.com/a2e0b3b55f.js" crossorigin="anonymous"></script>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We provide the best quality, service, and value for your needs."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Default Icon Color",
+      "default": "#2ecc71"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size (px)",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature Icon Image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Font Awesome Icon Class (optional)",
+          "default": "fa-solid fa-leaf",
+          "info": "Example: fa-solid fa-truck, fa-solid fa-star, fa-solid fa-heart"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "High Quality Products"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Feature Description",
+          "default": "We maintain strict quality control and only offer premium items."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Us (With Icons or Images)",
+      "category": "Custom Sections",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "fa-solid fa-leaf",
+            "title": "Eco-Friendly Products",
+            "description": "We care for nature and offer sustainable products."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "fa-solid fa-truck-fast",
+            "title": "Fast Delivery",
+            "description": "We ensure quick and reliable delivery for all orders."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "fa-solid fa-headset",
+            "title": "24/7 Support",
+            "description": "Our support team is always available to assist you."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

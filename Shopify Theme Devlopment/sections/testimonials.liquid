@@ -1,0 +1,306 @@
+<!-- 📁 sections/testimonials-carousel.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ✅ Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<section class="testimonials-carousel" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <!-- 🏷️ Section Header -->
+    <div class="carousel-header" style="text-align: {{ section.settings.text_alignment }};">
+      <h2 class="carousel-title" style="color: {{ section.settings.title_color }};">{{ section.settings.main_title }}</h2>
+      <p class="carousel-subtitle" style="color: {{ section.settings.subtitle_color }};">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <!-- 💬 Swiper Slider -->
+    <div class="swiper testimonialsSwiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              {% if block.settings.image != blank %}
+                <div class="testimonial-avatar">
+                  <img src="{{ block.settings.image | image_url: width: 100 }}" alt="{{ block.settings.customer_name }}">
+                </div>
+              {% endif %}
+              <p class="testimonial-message">“{{ block.settings.message }}”</p>
+              <div class="testimonial-rating">
+                {% for i in (1..5) %}
+                  {% if i <= block.settings.rating %}
+                    <i class="fa-solid fa-star"></i>
+                  {% else %}
+                    <i class="fa-regular fa-star"></i>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <h3 class="testimonial-name">{{ block.settings.customer_name }}</h3>
+              <p class="testimonial-role">{{ block.settings.customer_role }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- ✅ Swiper Navigation -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a2e0b3b55f.js" crossorigin="anonymous"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    new Swiper(".testimonialsSwiper", {
+      loop: true,
+      grabCursor: true,
+      spaceBetween: 30,
+      slidesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 }
+      }
+    });
+  });
+</script>
+
+<style>
+  .testimonials-carousel {
+    padding: 80px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .carousel-header {
+    margin-bottom: 50px;
+  }
+
+  .carousel-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .carousel-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+  }
+
+  .testimonial-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    padding: 30px 25px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .testimonial-avatar img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #f1c40f;
+  }
+
+  .testimonial-message {
+    font-size: 0.95rem;
+    color: #444;
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+
+  .testimonial-rating {
+    color: #f1c40f;
+    margin-bottom: 8px;
+  }
+
+  .testimonial-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 3px;
+  }
+
+  .testimonial-role {
+    font-size: 0.9rem;
+    color: #777;
+  }
+
+  /* ✅ Swiper Customization */
+  .swiper-button-prev, .swiper-button-next {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  .swiper-button-prev:hover, .swiper-button-next:hover {
+    color: #f1c40f;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: #aaa;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #f1c40f;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-title {
+      font-size: 1.7rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonials Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Our Happy Customers"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See what people say about us"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fafafa"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Image"
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name",
+          "default": "Riya Sharma"
+        },
+        {
+          "type": "text",
+          "id": "customer_role",
+          "label": "Customer Role / Location",
+          "default": "Verified Buyer"
+        },
+        {
+          "type": "textarea",
+          "id": "message",
+          "label": "Customer Message",
+          "default": "Amazing products and great service!"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Customer Rating (1–5)",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Carousel",
+      "category": "Custom Sections",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Amit Patel",
+            "customer_role": "Regular Buyer",
+            "message": "High-quality and super fresh products every time!",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Sneha Mehta",
+            "customer_role": "Verified User",
+            "message": "Very satisfied with the service and packaging!",
+            "rating": 4
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Rahul Singh",
+            "customer_role": "Returning Customer",
+            "message": "Quick delivery and premium quality. Love it!",
+            "rating": 5
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
