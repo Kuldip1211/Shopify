@@ -1,6 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": { "type": "about-page" }
+    "about": {
+      "type": "about-page",
+      "blocks": {
+        "team_member_zgCHck": {
+          "type": "team_member",
+          "settings": {
+            "photo": "shopify://shop_images/welcome-to-my-business.jpg",
+            "name": "Kuldeep Chudasama",
+            "role": "Founder & Gardener",
+            "bio": "Nature lover and plant enthusiast dedicated to making the world greener, one home at a time."
+          }
+        },
+        "team_member_ECDKJJ": {
+          "type": "team_member",
+          "settings": {
+            "photo": "shopify://shop_images/hard-work-pays-off.jpg",
+            "name": "Kuldeep Chudasama",
+            "role": "Founder & Gardener",
+            "bio": "Nature lover and plant enthusiast dedicated to making the world greener, one home at a time."
+          }
+        },
+        "why_point_VP8tk8": {
+          "type": "why_point",
+          "settings": {
+            "icon": "shopify://shop_images/leaf.png",
+            "title": "Healthy, Handpicked Plants",
+            "text": "Each plant is carefully selected and nurtured to ensure quality and freshness."
+          }
+        },
+        "why_point_VidL8T": {
+          "type": "why_point",
+          "settings": {
+            "icon": "shopify://shop_images/fast-delivery.png",
+            "title": "Healthy, Handpicked Plants",
+            "text": "Each plant is carefully selected and nurtured to ensure quality and freshness."
+          }
+        },
+        "why_point_pAgrG6": {
+          "type": "why_point",
+          "settings": {
+            "icon": "shopify://shop_images/customer-support.png",
+            "title": "Healthy, Handpicked Plants",
+            "text": "Each plant is carefully selected and nurtured to ensure quality and freshness."
+          }
+        }
+      },
+      "block_order": [
+        "team_member_zgCHck",
+        "team_member_ECDKJJ",
+        "why_point_VP8tk8",
+        "why_point_VidL8T",
+        "why_point_pAgrG6"
+      ],
+      "settings": {
+        "hero_image": "shopify://shop_images/palm-trees-sky.jpg",
+        "hero_heading": "About Shiv Gardening",
+        "hero_subtext": "Nurturing nature — growing happiness in every home.",
+        "hero_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "text_color": "#333333",
+        "heading_color": "#1a1a1a",
+        "story_image": "shopify://shop_images/a-woman-in-her-shop.jpg",
+        "story_heading": "Our Story",
+        "story_text": "At Shiv Gardening, our roots lie in the love for plants and the joy of green living. What started as a small home nursery has grown into a full-fledged destination for plant lovers, offering everything from indoor plants to gardening tools.",
+        "mission_bg": "#f8f9fa",
+        "mission_heading": "Our Mission & Values",
+        "mission_text": "We aim to promote sustainable and accessible gardening practices that make homes greener, air purer, and lives happier.",
+        "card_bg": "#ffffff",
+        "why_heading": "Why Choose Shiv Gardening?",
+        "team_bg": "#f8f9fa",
+        "team_heading": "Meet Our Team",
+        "team_subtext": "Behind every plant, there’s a passionate team nurturing it with love and care."
+      }
+    }
   },
-  "order": ["main"]
+  "order": [
+    "about"
+  ]
 }

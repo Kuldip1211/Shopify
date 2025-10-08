@@ -1,0 +1,167 @@
+<!-- 📄 sections/about-us-page.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<section 
+  class="about-us-section"
+  style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }}; font-family: 'Poppins', sans-serif;"
+>
+
+  <!-- 🌸 Hero Banner -->
+  <div class="about-hero" 
+    style="
+      position: relative;
+      background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url({{ section.settings.hero_image | img_url: '1600x' }});
+      background-size: cover;
+      background-position: center;
+      padding: 120px 20px;
+      text-align: center;
+      color: {{ section.settings.hero_text_color }};
+    "
+  >
+    <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 15px;">{{ section.settings.hero_heading }}</h1>
+    <p style="font-size: 1.2rem; max-width: 750px; margin: 0 auto;">{{ section.settings.hero_subtext }}</p>
+  </div>
+
+  <!-- 🌱 Our Story -->
+  <div class="about-story" style="max-width: 1200px; margin: 80px auto; padding: 0 20px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+      <div>
+        <img src="{{ section.settings.story_image | img_url: '800x' }}" alt="Our Story" style="width: 100%; border-radius: 14px; box-shadow: 0 6px 25px rgba(0,0,0,0.15); transition: 0.3s;">
+      </div>
+      <div>
+        <h2 style="font-size: 2rem; font-weight: 700; color: {{ section.settings.heading_color }};">{{ section.settings.story_heading }}</h2>
+        <p style="margin-top: 20px; line-height: 1.8; font-size: 1.05rem;">{{ section.settings.story_text }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌻 Mission & Values -->
+  <div class="mission-section" style="background-color: {{ section.settings.mission_bg }}; padding: 80px 20px;">
+    <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: {{ section.settings.heading_color }};">{{ section.settings.mission_heading }}</h2>
+      <p style="margin-top: 15px; max-width: 800px; margin-inline: auto;">{{ section.settings.mission_text }}</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px;">
+        {% for block in section.blocks %}
+          {% if block.type == 'value_card' %}
+            <div style="background-color: {{ section.settings.card_bg }}; padding: 30px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); text-align: center; transition: 0.3s;">
+              {% if block.settings.icon %}
+                <img src="{{ block.settings.icon | img_url: '100x' }}" alt="Icon" style="width: 70px; margin-bottom: 15px;">
+              {% endif %}
+              <h4 style="font-weight: 600; margin-bottom: 10px;">{{ block.settings.title }}</h4>
+              <p style="font-size: 0.95rem;">{{ block.settings.description }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌼 Why Choose Us -->
+  <div class="why-choose" style="padding: 80px 20px;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 2rem; font-weight: 700; text-align: center; color: {{ section.settings.heading_color }};">{{ section.settings.why_heading }}</h2>
+      <div style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        {% for block in section.blocks %}
+          {% if block.type == 'why_point' %}
+            <div style="background-color: {{ section.settings.card_bg }}; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.07); text-align: center;">
+              {% if block.settings.icon %}
+                <img src="{{ block.settings.icon | img_url: '80x' }}" alt="Icon" style="width: 60px; margin-bottom: 15px;">
+              {% endif %}
+              <h4 style="font-weight: 600; margin-bottom: 10px;">{{ block.settings.title }}</h4>
+              <p style="font-size: 0.95rem;">{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌿 Meet Our Team -->
+  <div class="team-section" style="background-color: {{ section.settings.team_bg }}; padding: 80px 20px;">
+    <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: {{ section.settings.heading_color }};">{{ section.settings.team_heading }}</h2>
+      <p style="margin-top: 10px; max-width: 700px; margin-inline: auto;">{{ section.settings.team_subtext }}</p>
+
+      <div style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+        {% for block in section.blocks %}
+          {% if block.type == 'team_member' %}
+            <div style="background-color: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: 0.3s; text-align: center;">
+              <img src="{{ block.settings.photo | img_url: '200x' }}" alt="{{ block.settings.name }}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+              <h4 style="font-weight: 600;">{{ block.settings.name }}</h4>
+              <p style="font-size: 0.9rem; color: #777;">{{ block.settings.role }}</p>
+              <p style="font-size: 0.9rem; margin-top: 10px;">{{ block.settings.bio }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+@media (max-width: 768px) {
+  .about-story > div {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Us Page",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Background Image" },
+    { "type": "text", "id": "hero_heading", "label": "Hero Heading", "default": "About Shiv Gardening" },
+    { "type": "text", "id": "hero_subtext", "label": "Hero Subtext", "default": "Nurturing nature — growing happiness in every home." },
+    { "type": "color", "id": "hero_text_color", "label": "Hero Text Color", "default": "#ffffff" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#333333" },
+    { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#1a1a1a" },
+    { "type": "image_picker", "id": "story_image", "label": "Story Image" },
+    { "type": "text", "id": "story_heading", "label": "Story Heading", "default": "Our Story" },
+    { "type": "textarea", "id": "story_text", "label": "Story Description", "default": "At Shiv Gardening, our roots lie in the love for plants and the joy of green living. What started as a small home nursery has grown into a full-fledged destination for plant lovers, offering everything from indoor plants to gardening tools." },
+    { "type": "color", "id": "mission_bg", "label": "Mission Section Background", "default": "#f8f9fa" },
+    { "type": "text", "id": "mission_heading", "label": "Mission Heading", "default": "Our Mission & Values" },
+    { "type": "textarea", "id": "mission_text", "label": "Mission Description", "default": "We aim to promote sustainable and accessible gardening practices that make homes greener, air purer, and lives happier." },
+    { "type": "color", "id": "card_bg", "label": "Card Background", "default": "#ffffff" },
+    { "type": "text", "id": "why_heading", "label": "Why Choose Us Heading", "default": "Why Choose Shiv Gardening?" },
+    { "type": "color", "id": "team_bg", "label": "Team Section Background", "default": "#f8f9fa" },
+    { "type": "text", "id": "team_heading", "label": "Team Section Heading", "default": "Meet Our Team" },
+    { "type": "text", "id": "team_subtext", "label": "Team Section Subtext", "default": "Behind every plant, there’s a passionate team nurturing it with love and care." }
+  ],
+  "blocks": [
+    {
+      "type": "value_card",
+      "name": "Value Card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Sustainability" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "We believe in sustainable and organic gardening practices for a greener tomorrow." }
+      ]
+    },
+    {
+      "type": "why_point",
+      "name": "Why Choose Us Point",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Healthy, Handpicked Plants" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Each plant is carefully selected and nurtured to ensure quality and freshness." }
+      ]
+    },
+    {
+      "type": "team_member",
+      "name": "Team Member",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Kuldeep Chudasama" },
+        { "type": "text", "id": "role", "label": "Role", "default": "Founder & Gardener" },
+        { "type": "textarea", "id": "bio", "label": "Bio", "default": "Nature lover and plant enthusiast dedicated to making the world greener, one home at a time." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "About Us Page" }
+  ]
+}
+{% endschema %}
