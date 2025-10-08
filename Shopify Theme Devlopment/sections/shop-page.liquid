@@ -1,0 +1,305 @@
+<!-- 📄 sections/shop-page.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<section 
+  class="shop-page-section" 
+  style="background-color: {{ section.settings.bg_color }}; font-family: 'Poppins', sans-serif; padding: {{ section.settings.section_padding }}px 0;"
+>
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    
+    <!-- 🏷️ Section Header -->
+    <div class="shop-header" style="text-align: {{ section.settings.text_alignment }}; margin-bottom: 40px;">
+      <h2 style="color: {{ section.settings.heading_color }}; font-size: 32px; font-weight: 600;">
+        {{ section.settings.heading_text }}
+      </h2>
+      <p style="color: {{ section.settings.subheading_color }};">{{ section.settings.subheading_text }}</p>
+    </div>
+
+    <!-- 🧩 Filters Bar -->
+    <div class="filters">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="🔍 Search products..." 
+      >
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        {% for collection in collections %}
+          <option value="{{ collection.handle }}">{{ collection.title }}</option>
+        {% endfor %}
+      </select>
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="0-500">Below ₹500</option>
+        <option value="500-1000">₹500 - ₹1000</option>
+        <option value="1000-2000">₹1000 - ₹2000</option>
+        <option value="2000+">Above ₹2000</option>
+      </select>
+    </div>
+
+    <!-- 🛍️ Product Grid -->
+    <div id="productGrid" class="product-grid">
+      {% for product in collections.all.products %}
+        <div 
+          class="product-card" 
+          data-category="{{ product.collections.first.handle }}"
+          data-price="{{ product.price | divided_by: 100 }}"
+          data-title="{{ product.title | downcase }}"
+        >
+          <div class="image-wrapper">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+          </div>
+          <div class="product-info">
+            <h3>{{ product.title }}</h3>
+            <p class="price">{{ product.price | money }}</p>
+            <a href="{{ product.url }}" class="view-btn">View Product</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 🌿 Filters Styling */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filters input,
+  .filters select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    min-width: 200px;
+    font-size: 14px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .filters input:focus,
+  .filters select:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
+    outline: none;
+  }
+
+  /* 🛒 Product Grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    justify-content: center;
+  }
+
+  /* 🧱 Product Card */
+  .product-card {
+    width: 100%;
+    max-width: 280px;
+    height: 440px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .product-info {
+    padding: 15px 20px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .product-info h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .product-info .price {
+    color: #27ae60;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .view-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #27ae60;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .view-btn:hover {
+    background: #219150;
+  }
+
+  /* 📱 Responsive Adjustments */
+  @media (max-width: 992px) {
+    .product-card {
+      height: 380px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+    }
+
+    .product-card {
+      max-width: 100%;
+      height: 360px;
+    }
+
+    .product-card img {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-card {
+      height: auto;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const categoryFilter = document.getElementById("categoryFilter");
+    const priceFilter = document.getElementById("priceFilter");
+    const searchInput = document.getElementById("searchInput");
+    const productGrid = document.getElementById("productGrid");
+    const products = productGrid.querySelectorAll(".product-card");
+
+    function applyFilters() {
+      const selectedCategory = categoryFilter.value;
+      const selectedPrice = priceFilter.value;
+      const searchText = searchInput.value.trim().toLowerCase();
+
+      products.forEach(product => {
+        const productCategory = product.getAttribute("data-category");
+        const productPrice = parseFloat(product.getAttribute("data-price"));
+        const productTitle = product.getAttribute("data-title");
+
+        let show = true;
+
+        // 🏷️ Category filter
+        if (selectedCategory !== "all" && productCategory !== selectedCategory) {
+          show = false;
+        }
+
+        // 💰 Price filter
+        if (selectedPrice !== "all") {
+          const [min, max] = selectedPrice.split("-");
+          if (selectedPrice.includes("+")) {
+            if (productPrice < parseFloat(selectedPrice)) show = false;
+          } else {
+            if (productPrice < parseFloat(min) || productPrice > parseFloat(max)) show = false;
+          }
+        }
+
+        // 🔍 Search filter
+        if (searchText && !productTitle.includes(searchText)) {
+          show = false;
+        }
+
+        product.style.display = show ? "flex" : "none";
+      });
+    }
+
+    categoryFilter.addEventListener("change", applyFilters);
+    priceFilter.addEventListener("change", applyFilters);
+    searchInput.addEventListener("keyup", applyFilters);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Shop Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "Our Products"
+    },
+    {
+      "type": "text",
+      "id": "subheading_text",
+      "label": "Subheading Text",
+      "default": "Browse and search through our collection to find your favorites."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section Padding (px)",
+      "default": 60,
+      "min": 20,
+      "max": 150,
+      "step": 5
+    }
+  ],
+  "presets": [
+    { "name": "Shop Page" }
+  ]
+}
+{% endschema %}
