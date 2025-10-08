@@ -324,3 +324,179 @@ For page-specific or section-level customization, use the <code>{% schema %}</co
   💡 <em>In short, <code>settings_schema.json</code> defines all editable theme settings, connects them to Liquid files, and makes your Shopify theme dynamic, customizable, and user-friendly.</em>
 </p>
 
+<h1 align="center">🛠️ Shopify Theme Debugging & Troubleshooting Guide</h1>
+
+<p align="center">
+  A comprehensive guide on how to effectively debug, analyze, and troubleshoot Shopify themes and Liquid code.
+</p>
+
+---
+
+<h2>📘 1. Using Browser Developer Tools Effectively</h2>
+
+<p>
+Browser Developer Tools (especially <b>Chrome DevTools</b>) are essential for inspecting, debugging, and testing Shopify themes.
+</p>
+
+<ul>
+  <li><b>Inspect Elements:</b> Right-click → “Inspect” to view HTML structure and CSS rules.  
+    Use <code>Ctrl + Shift + C</code> to quickly select elements on the page.
+  </li>
+  <li><b>Network Tab:</b> Monitor AJAX calls, API responses, and asset requests.  
+    Detect missing files (404) or failed requests (500).
+  </li>
+  <li><b>Console Tab:</b> Identify JavaScript errors and warnings in real time.  
+    Use <code>console.log()</code> inside your <code>theme.js</code> or custom scripts.
+  </li>
+  <li><b>Sources Tab:</b> Set breakpoints and debug JS step by step.</li>
+  <li><b>Lighthouse Audits:</b> Test site performance, accessibility, and SEO using the built-in audit tool.</li>
+</ul>
+
+---
+
+<h2>💧 2. Debugging Liquid Code and Theme Issues</h2>
+
+<p>
+Liquid is the backbone of Shopify themes. Errors here can cause sections to break or data to not render correctly.
+</p>
+
+<ul>
+  <li><b>Conditional Debugging:</b>  
+    Use Liquid conditionals to isolate code:
+    <pre><code>{% if product %}{{ product.title }}{% else %}No product found{% endif %}</code></pre>
+  </li>
+  <li><b>Output Debug Info:</b>  
+    Convert data to JSON for inspection:
+    <pre><code>{{ section.settings | json }}</code></pre>
+  </li>
+  <li><b>Safe Commenting:</b>  
+    Liquid comments: <code>{% comment %}...{% endcomment %}</code>  
+    HTML comments: <code>&lt;!-- ... --&gt;</code>
+  </li>
+  <li><b>Fix Missing Sections:</b>  
+    JSON templates require valid section references:
+    <pre><code>{
+  "sections": {
+    "main": { "type": "section-file-name" }
+  },
+  "order": ["main"]
+}</code></pre>
+  </li>
+  <li><b>Use Preview Mode:</b>  
+    From Shopify Admin → <b>Online Store → Themes → Customize → Preview</b>.</li>
+</ul>
+
+---
+
+<h2>📜 3. Analyzing Error Logs and Console Messages</h2>
+
+<p>
+Understanding logs helps trace theme or app conflicts effectively.
+</p>
+
+<ul>
+  <li><b>Console Errors:</b>  
+    JavaScript or Liquid-related issues appear here.  
+    Example:
+    <pre><code>Uncaught TypeError: Cannot read property 'value' of null</code></pre>
+  </li>
+  <li><b>Network Tab:</b>  
+    Inspect failed requests (404, 500, 403).  
+    Check for missing section assets or invalid API calls.
+  </li>
+  <li><b>Shopify Activity Logs:</b>  
+    Navigate to <b>Settings → Notifications → Activity Log</b> for theme or staff activity tracking.</li>
+  <li><b>App Logs:</b>  
+    Many Shopify apps have internal log pages.  
+    Check “Apps → [App Name] → Logs”.</li>
+</ul>
+
+---
+
+<h2>🧭 4. Utilizing Shopify’s Built-in Debugging Tools</h2>
+
+<p>
+Shopify offers a powerful CLI and static analysis tools to catch errors before deployment.
+</p>
+
+<ul>
+  <li><b>Shopify CLI (Local Development):</b>  
+    Run and preview your theme locally:
+    <pre><code>shopify theme dev</code></pre>
+    - Displays Liquid and syntax errors in terminal.  
+    - Auto-reloads browser on file changes.
+  </li>
+  <li><b>Theme Check:</b>  
+    Scan your code for best practices and syntax issues:
+    <pre><code>shopify theme check</code></pre>
+    Detects deprecated tags, schema errors, and invalid Liquid syntax.
+  </li>
+  <li><b>Theme Editor (Customize):</b>  
+    Use the live <b>Customize</b> editor to preview and debug sections visually.
+  </li>
+</ul>
+
+---
+
+<h2>🧩 5. Troubleshooting Common Theme & App Problems</h2>
+
+<p>
+Common theme and app-related issues can often be fixed by isolating their causes step by step.
+</p>
+
+<table>
+  <tr>
+    <th>Issue</th>
+    <th>Possible Cause</th>
+    <th>Fix</th>
+  </tr>
+  <tr>
+    <td>Section not displaying</td>
+    <td>Section file not linked in template</td>
+    <td>Add <code>{% section 'file-name' %}</code> or update JSON template mapping</td>
+  </tr>
+  <tr>
+    <td>Styles not loading</td>
+    <td>Wrong asset path</td>
+    <td>Use <code>{{ 'style.css' | asset_url | stylesheet_tag }}</code></td>
+  </tr>
+  <tr>
+    <td>JavaScript not working</td>
+    <td>DOM not loaded before execution</td>
+    <td>Wrap in <code>DOMContentLoaded</code> event or move script to end of <code>&lt;body&gt;</code></td>
+  </tr>
+  <tr>
+    <td>App block not showing</td>
+    <td>App embed not enabled</td>
+    <td>Go to “Customize → App Embeds” and enable it</td>
+  </tr>
+</table>
+
+---
+
+<h2>🚀 Recommended Debugging Workflow</h2>
+
+<ol>
+  <li>Open your Shopify store → Launch DevTools → Check Console & Network.</li>
+  <li>Run <code>shopify theme dev</code> for local development and live error logging.</li>
+  <li>Use <code>shopify theme check</code> before pushing updates.</li>
+  <li>Test section visibility in Preview mode.</li>
+  <li>Use Lighthouse audits to improve performance and fix accessibility issues.</li>
+</ol>
+
+---
+
+<h3 align="center">💡 Pro Tip:</h3>
+
+<p align="center">
+Combine DevTools + Shopify CLI + Theme Check for a complete debugging workflow.  
+It helps detect both frontend and backend (Liquid) issues quickly and efficiently.
+</p>
+
+---
+
+<p align="center">
+  <b>Author:</b> Kuldeep Chudasama<br>
+  <b>Project:</b> Shopify Theme Development<br>
+  <b>Last Updated:</b> October 2025
+</p>

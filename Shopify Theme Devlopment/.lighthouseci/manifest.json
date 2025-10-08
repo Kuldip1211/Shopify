@@ -1,0 +1,110 @@
+[
+  {
+    "url": "https://shivgardning.myshopify.com/",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com--2025_10_08_13_24_33.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com--2025_10_08_13_24_33.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com--2025_10_08_13_24_48.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com--2025_10_08_13_24_48.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/pages/shop",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_shop-2025_10_08_13_25_15.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_shop-2025_10_08_13_25_15.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/pages/shop",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_shop-2025_10_08_13_25_29.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_shop-2025_10_08_13_25_29.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/pages/contact",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_contact-2025_10_08_13_25_56.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_contact-2025_10_08_13_25_56.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/pages/contact",
+    "isRepresentativeRun": false,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_contact-2025_10_08_13_26_10.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_contact-2025_10_08_13_26_10.report.json",
+    "summary": {
+      "performance": 1,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/",
+    "isRepresentativeRun": true,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com--2025_10_08_13_25_02.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com--2025_10_08_13_25_02.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/pages/shop",
+    "isRepresentativeRun": true,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_shop-2025_10_08_13_25_43.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_shop-2025_10_08_13_25_43.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  },
+  {
+    "url": "https://shivgardning.myshopify.com/pages/contact",
+    "isRepresentativeRun": true,
+    "htmlPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_contact-2025_10_08_13_26_24.report.html",
+    "jsonPath": "/home/kuldeep.chudasma/Desktop/Shopify/Shopify Theme Devlopment/.lighthouseci/shivgardning_myshopify_com-pages_contact-2025_10_08_13_26_24.report.json",
+    "summary": {
+      "performance": 0.99,
+      "accessibility": 0.93,
+      "best-practices": 0.96,
+      "seo": 0.91
+    }
+  }
+]
