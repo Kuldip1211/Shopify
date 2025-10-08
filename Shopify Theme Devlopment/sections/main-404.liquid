@@ -1,0 +1,99 @@
+<!-- 📄 sections/main-404.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<section class="not-found-section" style="font-family:'Poppins',sans-serif; text-align:center; padding:80px 20px; background:{{ section.settings.bg_color }};">
+  <div class="container" style="max-width:800px; margin:0 auto;">
+    
+    <!-- 🧩 Lottie Animation -->
+    <div class="animation-container" style="max-width:400px; margin:0 auto;">
+      <lottie-player 
+        src="{{ section.settings.animation_url }}"  
+        background="transparent"  
+        speed="1"  
+        style="width:100%; height:100%;"  
+        loop  
+        autoplay>
+      </lottie-player>
+    </div>
+
+    <!-- 🧭 Text Content -->
+    <h1 class="not-found-title" style="font-size:42px; margin:20px 0 10px; color:#222;">
+      {{ section.settings.heading_text }}
+    </h1>
+    <p class="not-found-subtext" style="color:#555; font-size:16px; margin-bottom:30px;">
+      {{ section.settings.subheading_text }}
+    </p>
+
+    <!-- 🔘 Action Buttons -->
+    <div class="not-found-buttons" style="display:flex; justify-content:center; flex-wrap:wrap; gap:15px;">
+      <a href="/" class="btn home-btn">🏠 Go to Homepage</a>
+      <button onclick="history.back()" class="btn back-btn">⬅️ Go Back</button>
+    </div>
+  </div>
+</section>
+
+<style>
+.btn {
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:600;
+  text-decoration:none;
+  transition:0.3s ease;
+}
+.home-btn {
+  background:#27ae60;
+  color:#fff;
+  border:none;
+}
+.home-btn:hover {
+  background:#219150;
+}
+.back-btn {
+  background:#eee;
+  color:#333;
+  border:none;
+}
+.back-btn:hover {
+  background:#ddd;
+}
+@media (max-width:768px){
+  .not-found-title{font-size:32px;}
+}
+</style>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "Oops! Page Not Found 😢"
+    },
+    {
+      "type": "text",
+      "id": "subheading_text",
+      "label": "Subheading Text",
+      "default": "It looks like the page you’re looking for doesn’t exist or was moved."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "url",
+      "id": "animation_url",
+      "label": "Lottie Animation JSON URL",
+      "default": "https://assets6.lottiefiles.com/packages/lf20_qp1q7mct.json"
+    }
+  ],
+  "presets": [{ "name": "404 Page" }]
+}
+{% endschema %}

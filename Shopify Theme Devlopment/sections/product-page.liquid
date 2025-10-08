@@ -1,153 +1,220 @@
-<!-- 📄 sections/product-page.liquid -->
+<!-- 📄 sections/main-product.liquid -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<section class="product-page" style="font-family: 'Poppins', sans-serif; background-color: {{ section.settings.bg_color }}; padding: 60px 20px;">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px; align-items: start;">
-    
-    <!-- 🖼️ Product Images -->
-    <div class="product-images">
-      {% if product.images.size > 0 %}
+<section class="product-detail-section" style="font-family:'Poppins',sans-serif; padding:60px 0; background:{{ section.settings.bg_color }};">
+  <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
+
+    {% if product %}
+    <div class="product-detail-wrapper">
+      
+      <!-- 🖼️ Product Images -->
+      <div class="product-images">
         <div class="main-image">
-          <img id="mainProductImage" src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+          <img id="mainProductImage" src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
         </div>
-        <div class="thumbs" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+        <div class="thumbnail-gallery">
           {% for image in product.images %}
-            <img 
-              src="{{ image | img_url: '200x' }}" 
-              alt="{{ product.title }}" 
-              class="thumb" 
-              onclick="document.getElementById('mainProductImage').src='{{ image | img_url: '800x' }}';"
-              style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #eee; transition: border 0.2s ease;"
-              onmouseover="this.style.border='2px solid #27ae60'" 
-              onmouseout="this.style.border='2px solid #eee'"
-            >
+            <img src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}" class="thumbnail" onclick="updateMainImage('{{ image | img_url: 'large' }}')">
           {% endfor %}
         </div>
-      {% endif %}
-    </div>
+      </div>
 
-    <!-- 📄 Product Details -->
-    <div class="product-info">
-      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">{{ product.title }}</h1>
-      <p style="font-size: 1.2rem; color: #27ae60; font-weight: 600;">{{ product.price | money }}</p>
+      <!-- 🧾 Product Info -->
+      <div class="product-info">
+        <h1 class="product-title">{{ product.title }}</h1>
+        <p class="vendor">👨‍💼 Vendor: {{ product.vendor }}</p>
+        <p class="category">📦 Category: {{ product.type }}</p>
 
-      {% if product.compare_at_price > product.price %}
-        <p style="color: #e74c3c; font-weight: 500;">Sale: Save {{ product.compare_at_price | minus: product.price | money }}</p>
-      {% endif %}
+        {% if product.tags.size > 0 %}
+          <p class="tags">🏷️ Tags: 
+            {% for tag in product.tags %}
+              <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </p>
+        {% endif %}
 
-      <!-- 🌿 Variant Selector -->
-      {% if product.has_only_default_variant == false %}
-        <form method="post" action="/cart/add" id="productForm">
-          <input type="hidden" name="id" id="variantId" value="{{ product.variants.first.id }}">
-          
-          {% for option in product.options_with_values %}
-            <div class="variant-group" style="margin-top: 20px;">
-              <label style="font-weight: 600; margin-bottom: 5px; display: block;">Select {{ option.name }}:</label>
-              <select class="variant-select" data-option-index="{{ forloop.index0 }}" style="padding:10px; border-radius:8px; border:1px solid #ccc; width:100%;">
-                {% for value in option.values %}
-                  <option value="{{ value | escape }}">{{ value }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          {% endfor %}
+        <p class="price">💰 {{ product.price | money }}</p>
 
-          <button type="submit" class="add-to-cart-btn" style="margin-top: 25px;">🛒 Add to Cart</button>
-        </form>
-      {% else %}
-        <form method="post" action="/cart/add">
-          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-          <button type="submit" class="add-to-cart-btn" style="margin-top: 25px;">🛒 Add to Cart</button>
-        </form>
-      {% endif %}
+        {% if product.compare_at_price > product.price %}
+          <p class="compare-price">Was: {{ product.compare_at_price | money }}</p>
+        {% endif %}
 
-      <!-- 📜 Description -->
-      <div class="description" style="margin-top: 30px; line-height: 1.8; color: #555;">
-        {{ product.description }}
+        {% if product.description != blank %}
+          <div class="description">
+            <h3>📝 Description</h3>
+            <div>{{ product.description }}</div>
+          </div>
+        {% endif %}
+
+        <!-- 🧩 Variants -->
+        {% if product.has_only_default_variant == false %}
+          <div class="variants">
+            <h4>Select Options:</h4>
+            <form id="productForm" method="post" action="/cart/add">
+              {% for option in product.options_with_values %}
+                <label><strong>{{ option.name }}</strong></label>
+                <select name="options[{{ option.name }}]" required>
+                  {% for value in option.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              {% endfor %}
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button type="submit" class="add-to-cart-btn">🛒 Add to Cart</button>
+            </form>
+          </div>
+        {% else %}
+          <form method="post" action="/cart/add" class="single-variant-form">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <button type="submit" class="add-to-cart-btn">🛒 Add to Cart</button>
+          </form>
+        {% endif %}
+
+        <!-- ✅ Inventory Info -->
+        <p class="inventory">
+          {% if product.available %}
+            ✅ In Stock ({{ product.variants.first.inventory_quantity }} available)
+          {% else %}
+            ❌ Out of Stock
+          {% endif %}
+        </p>
       </div>
     </div>
+    {% endif %}
   </div>
 </section>
 
 <style>
-  .add-to-cart-btn {
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 25px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    width: 100%;
+.product-detail-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.product-images {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.main-image img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.thumbnail-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+.thumbnail:hover {
+  border-color: #27ae60;
+  transform: scale(1.05);
+}
+.product-info h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+.vendor, .category, .price, .compare-price {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.price {
+  color: #27ae60;
+  font-weight: 700;
+  font-size: 22px;
+}
+.compare-price {
+  color: #999;
+  text-decoration: line-through;
+}
+.description {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+.tag {
+  display: inline-block;
+  background: #eafaf1;
+  border: 1px solid #27ae60;
+  color: #27ae60;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  margin: 2px;
+}
+.add-to-cart-btn {
+  background: #27ae60;
+  color: #fff;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+.add-to-cart-btn:hover {
+  background: #219150;
+}
+.inventory {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+@media (max-width: 900px) {
+  .product-detail-wrapper {
+    grid-template-columns: 1fr;
   }
-  .add-to-cart-btn:hover {
-    background-color: #219150;
-  }
-  @media (max-width: 768px) {
-    .product-page {
-      padding: 40px 15px;
-    }
-    .thumbs img {
-      width: 60px;
-      height: 60px;
-    }
-  }
+}
 </style>
 
 <script>
+function updateMainImage(url) {
+  document.getElementById("mainProductImage").src = url;
+}
+
+// 🛒 Handle Add to Cart feedback
 document.addEventListener("DOMContentLoaded", () => {
-  const productData = {{ product | json }};
-  const selects = document.querySelectorAll(".variant-select");
-  const variantIdInput = document.getElementById("variantId");
-  const form = document.getElementById("productForm");
-
-  if (selects.length > 0) {
-    selects.forEach(select => {
-      select.addEventListener("change", () => {
-        const selectedOptions = Array.from(selects).map(sel => sel.value);
-        const matchedVariant = productData.variants.find(v => JSON.stringify(v.options) === JSON.stringify(selectedOptions));
-        if (matchedVariant) {
-          variantIdInput.value = matchedVariant.id;
-          document.querySelector(".product-info p").innerText = Shopify.formatMoney(matchedVariant.price, "{{ shop.money_format }}");
-        }
-      });
-    });
-  }
-
-  // 🛒 Add to Cart AJAX + Header Update
-  if (form) {
+  document.querySelectorAll("form[action='/cart/add']").forEach(form => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = new FormData(form);
-      try {
-        const res = await fetch("/cart/add.js", {
-          method: "POST",
-          headers: { "X-Requested-With": "XMLHttpRequest" },
-          body: formData
-        });
-        if (res.ok) {
-          alert("✅ Product added to cart!");
-          if (window.updateCartCount) window.updateCartCount();
-        } else {
-          alert("Something went wrong. Please try again.");
-        }
-      } catch (error) {
-        console.error("Cart add failed:", error);
+      const data = new FormData(form);
+      const res = await fetch("/cart/add.js", { method: "POST", body: data });
+      if (res.ok) {
+        alert("✅ Product added to cart!");
+      } else {
+        alert("Something went wrong!");
       }
     });
-  }
+  });
 });
 </script>
 
 {% schema %}
 {
-  "name": "Product Page",
+  "name": "Main Product",
   "settings": [
-    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" }
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f9f9f9" }
   ],
-  "presets": [
-    { "name": "Product Page" }
-  ]
+  "presets": [{ "name": "Product Detail Page" }]
 }
 {% endschema %}

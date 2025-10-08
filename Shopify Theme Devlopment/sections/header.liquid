@@ -19,7 +19,7 @@
     <!-- 🛒 Right: Profile & Cart Icons -->
     <div class="header-icons">
       
-      <!-- 👤 Profile Icon -->
+      <!-- 👤 Profile / Auth Dropdown -->
       <div class="profile-dropdown">
         <button class="icon-link profile-btn" id="profileBtn">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -28,16 +28,27 @@
           </svg>
         </button>
 
-        <!-- 📋 Dropdown Menu (Two Rows Layout) -->
+        <!-- 📋 Dropdown Menu -->
         <div class="profile-menu" id="profileMenu">
-          <!-- 🧍 Row 1 -->
-          <a href="/account" class="menu-item full-row">👤 My Profile</a>
 
-          <!-- 📦 Row 2: Two Buttons Side by Side -->
-          <div class="menu-row">
-            <a href="/account/orders" class="menu-item flex-btn">📦 My Orders</a>
-            <a href="/account/logout" class="menu-item flex-btn logout">🚪 Logout</a>
-          </div>
+          {% if customer %}
+            <!-- 🧍 If user is logged in -->
+            <a href="/account" class="menu-item full-row">👤 {{ customer.first_name | default: 'My Profile' }}</a>
+
+            <div class="menu-row">
+              <a href="/account/orders" class="menu-item flex-btn">📦 My Orders</a>
+              <a href="/account/logout" class="menu-item flex-btn logout">🚪 Logout</a>
+            </div>
+
+          {% else %}
+            <!-- 🚪 If user is not logged in -->
+            <a href="/account/login" class="menu-item full-row">🔑 Login</a>
+
+            <div class="menu-row">
+              <a href="/account/register" class="menu-item flex-btn">🪴 Register</a>
+              <a href="/account/login" class="menu-item flex-btn">🔓 Sign In</a>
+            </div>
+          {% endif %}
         </div>
       </div>
 
