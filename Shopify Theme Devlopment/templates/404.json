@@ -1,8 +1,12 @@
 {
-  "name": "404 Page",
   "sections": {
     "main-404": {
-      "type": "main-404"
+      "type": "404-section",
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#333333",
+        "show_animation": true
+      }
     }
   },
   "order": ["main-404"]
