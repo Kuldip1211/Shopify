@@ -1,19 +1,39 @@
 <!-- 📁 sections/announcement-bar.liquid -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<div class="announcement-bar" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
-  <div class="announcement-container">
-    <p class="announcement-text">{{ section.settings.announcement_text }}</p>
-
-    {% if section.settings.show_button %}
-      <a href="{{ section.settings.button_link }}" class="announcement-btn" style="background-color: {{ section.settings.button_bg_color }}; color: {{ section.settings.button_text_color }};">
-        {{ section.settings.button_text }}
-      </a>
-    {% endif %}
-  </div>
+<div
+  class="announcement-bar"
+  style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};"
+>
+  <marquee
+    behavior="scroll"
+    direction="left"
+    scrollamount="6"
+    onmouseover="this.stop();"
+    onmouseout="this.start();"
+  >
+    <div class="announcement-container">
+      <div class="annouc-container">
+        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
+      </div>
+      <div class="annouc-container">
+        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
+      </div>
+      <div class="annouc-container">
+        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
+      </div>
+      <div class="annouc-container">
+        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
+      </div>
+    </div>
+  </marquee>
 </div>
 
 <style>
+  .annouc-container {
+    width: 400px;
+  }
+
   .announcement-bar {
     font-family: 'Poppins', sans-serif;
     padding: 10px 0;
@@ -22,7 +42,6 @@
   }
 
   .announcement-container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
     display: flex;
@@ -53,7 +72,7 @@
 
   @media (max-width: 768px) {
     .announcement-container {
-      flex-direction: column;
+      flex-direction: flex;
       text-align: center;
       gap: 8px;
     }

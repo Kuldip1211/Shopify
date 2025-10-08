@@ -1,0 +1,153 @@
+<!-- 📄 sections/product-page.liquid -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<section class="product-page" style="font-family: 'Poppins', sans-serif; background-color: {{ section.settings.bg_color }}; padding: 60px 20px;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px; align-items: start;">
+    
+    <!-- 🖼️ Product Images -->
+    <div class="product-images">
+      {% if product.images.size > 0 %}
+        <div class="main-image">
+          <img id="mainProductImage" src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+        </div>
+        <div class="thumbs" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+          {% for image in product.images %}
+            <img 
+              src="{{ image | img_url: '200x' }}" 
+              alt="{{ product.title }}" 
+              class="thumb" 
+              onclick="document.getElementById('mainProductImage').src='{{ image | img_url: '800x' }}';"
+              style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #eee; transition: border 0.2s ease;"
+              onmouseover="this.style.border='2px solid #27ae60'" 
+              onmouseout="this.style.border='2px solid #eee'"
+            >
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- 📄 Product Details -->
+    <div class="product-info">
+      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">{{ product.title }}</h1>
+      <p style="font-size: 1.2rem; color: #27ae60; font-weight: 600;">{{ product.price | money }}</p>
+
+      {% if product.compare_at_price > product.price %}
+        <p style="color: #e74c3c; font-weight: 500;">Sale: Save {{ product.compare_at_price | minus: product.price | money }}</p>
+      {% endif %}
+
+      <!-- 🌿 Variant Selector -->
+      {% if product.has_only_default_variant == false %}
+        <form method="post" action="/cart/add" id="productForm">
+          <input type="hidden" name="id" id="variantId" value="{{ product.variants.first.id }}">
+          
+          {% for option in product.options_with_values %}
+            <div class="variant-group" style="margin-top: 20px;">
+              <label style="font-weight: 600; margin-bottom: 5px; display: block;">Select {{ option.name }}:</label>
+              <select class="variant-select" data-option-index="{{ forloop.index0 }}" style="padding:10px; border-radius:8px; border:1px solid #ccc; width:100%;">
+                {% for value in option.values %}
+                  <option value="{{ value | escape }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+
+          <button type="submit" class="add-to-cart-btn" style="margin-top: 25px;">🛒 Add to Cart</button>
+        </form>
+      {% else %}
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <button type="submit" class="add-to-cart-btn" style="margin-top: 25px;">🛒 Add to Cart</button>
+        </form>
+      {% endif %}
+
+      <!-- 📜 Description -->
+      <div class="description" style="margin-top: 30px; line-height: 1.8; color: #555;">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .add-to-cart-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  .add-to-cart-btn:hover {
+    background-color: #219150;
+  }
+  @media (max-width: 768px) {
+    .product-page {
+      padding: 40px 15px;
+    }
+    .thumbs img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const productData = {{ product | json }};
+  const selects = document.querySelectorAll(".variant-select");
+  const variantIdInput = document.getElementById("variantId");
+  const form = document.getElementById("productForm");
+
+  if (selects.length > 0) {
+    selects.forEach(select => {
+      select.addEventListener("change", () => {
+        const selectedOptions = Array.from(selects).map(sel => sel.value);
+        const matchedVariant = productData.variants.find(v => JSON.stringify(v.options) === JSON.stringify(selectedOptions));
+        if (matchedVariant) {
+          variantIdInput.value = matchedVariant.id;
+          document.querySelector(".product-info p").innerText = Shopify.formatMoney(matchedVariant.price, "{{ shop.money_format }}");
+        }
+      });
+    });
+  }
+
+  // 🛒 Add to Cart AJAX + Header Update
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      try {
+        const res = await fetch("/cart/add.js", {
+          method: "POST",
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          body: formData
+        });
+        if (res.ok) {
+          alert("✅ Product added to cart!");
+          if (window.updateCartCount) window.updateCartCount();
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      } catch (error) {
+        console.error("Cart add failed:", error);
+      }
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#ffffff" }
+  ],
+  "presets": [
+    { "name": "Product Page" }
+  ]
+}
+{% endschema %}

@@ -1,5 +1,5 @@
 <!-- 📄 sections/shop-page.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <section 
   class="shop-page-section" 
@@ -8,20 +8,14 @@
   <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     
     <!-- 🏷️ Section Header -->
-    <div class="shop-header" style="text-align: {{ section.settings.text_alignment }}; margin-bottom: 40px;">
-      <h2 style="color: {{ section.settings.heading_color }}; font-size: 32px; font-weight: 600;">
-        {{ section.settings.heading_text }}
-      </h2>
-      <p style="color: {{ section.settings.subheading_color }};">{{ section.settings.subheading_text }}</p>
+    <div class="shop-header" style="text-align: {{ section.settings.text_alignment }}; margin-bottom: 50px;">
+      <h2 class="shop-title" style="color: {{ section.settings.heading_color }};">{{ section.settings.heading_text }}</h2>
+      <p class="shop-subtitle" style="color: {{ section.settings.subheading_color }};">{{ section.settings.subheading_text }}</p>
     </div>
 
     <!-- 🧩 Filters Bar -->
     <div class="filters">
-      <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="🔍 Search products..." 
-      >
+      <input type="text" id="searchInput" placeholder="🔍 Search products...">
       <select id="categoryFilter">
         <option value="all">All Categories</option>
         {% for collection in collections %}
@@ -47,259 +41,310 @@
           data-title="{{ product.title | downcase }}"
         >
           <div class="image-wrapper">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            </a>
           </div>
           <div class="product-info">
             <h3>{{ product.title }}</h3>
             <p class="price">{{ product.price | money }}</p>
-            <a href="{{ product.url }}" class="view-btn">View Product</a>
+
+            <div class="button-group">
+              <form method="post" action="/cart/add" class="add-to-cart-form" data-product-id="{{ product.id }}">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit" class="add-to-cart-btn">🛒 Add to Cart</button>
+              </form>
+              <a href="{{ product.url }}" class="view-btn">View Product</a>
+            </div>
           </div>
         </div>
       {% endfor %}
     </div>
+
+    <div id="cart-toast" class="cart-toast">Product added to cart 🪴</div>
+
   </div>
 </section>
 
 <style>
-  /* 🌿 Filters Styling */
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 40px;
-    justify-content: center;
-    align-items: center;
-  }
+/* 🌿 Typography */
+.shop-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.shop-subtitle {
+  font-size: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
 
+/* 🌿 Filters Bar */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 50px;
+  justify-content: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 15px 20px;
+}
+.filters input,
+.filters select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-width: 180px;
+  font-size: 14px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+.filters input:focus,
+.filters select:focus {
+  border-color: #27ae60;
+  box-shadow: 0 0 0 2px rgba(39,174,96,0.2);
+  outline: none;
+}
+.filters select:hover,
+.filters input:hover {
+  border-color: #27ae60;
+}
+
+/* 🛒 Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+}
+
+/* 🧱 Product Card */
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.image-wrapper img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.product-card:hover img {
+  transform: scale(1.1);
+}
+
+/* 🧩 Info Section */
+.product-info {
+  padding: 18px 20px;
+  text-align: center;
+}
+.product-info h3 {
+  font-size: 18px;
+  color: #222;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.product-info .price {
+  color: #27ae60;
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 12px;
+}
+
+/* 🛒 Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.add-to-cart-btn, .view-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.add-to-cart-btn {
+  background: #2ecc71;
+  color: #fff;
+  font-weight: 600;
+}
+.add-to-cart-btn:hover {
+  background: #27ae60;
+}
+.view-btn {
+  background: #eee;
+  color: #333;
+}
+.view-btn:hover {
+  background: #ddd;
+}
+
+/* ✅ Toast */
+.cart-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #27ae60;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+.cart-toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 1024px) {
+  .shop-title { font-size: 30px; }
+}
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
   .filters input,
   .filters select {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    min-width: 200px;
-    font-size: 14px;
-    background: #fff;
-    transition: all 0.3s ease;
-  }
-
-  .filters input:focus,
-  .filters select:focus {
-    border-color: #27ae60;
-    box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
-    outline: none;
-  }
-
-  /* 🛒 Product Grid */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    justify-content: center;
-  }
-
-  /* 🧱 Product Card */
-  .product-card {
     width: 100%;
-    max-width: 280px;
-    height: 440px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
-
-  .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
-
   .product-card img {
+    height: 220px;
+  }
+  .shop-title { font-size: 26px; }
+  .shop-subtitle { font-size: 14px; }
+}
+@media (max-width: 480px) {
+  .product-card img {
+    height: 200px;
+  }
+  .add-to-cart-btn, .view-btn {
     width: 100%;
-    height: 230px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
   }
-
-  .product-card:hover img {
-    transform: scale(1.05);
-  }
-
-  .product-info {
-    padding: 15px 20px;
-    text-align: center;
-    flex-grow: 1;
-  }
-
-  .product-info h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-
-  .product-info .price {
-    color: #27ae60;
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
-
-  .view-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #27ae60;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 14px;
-    transition: all 0.3s ease;
-  }
-
-  .view-btn:hover {
-    background: #219150;
-  }
-
-  /* 📱 Responsive Adjustments */
-  @media (max-width: 992px) {
-    .product-card {
-      height: 380px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .filters {
-      flex-direction: column;
-    }
-
-    .product-card {
-      max-width: 100%;
-      height: 360px;
-    }
-
-    .product-card img {
-      height: 200px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .product-card {
-      height: auto;
-    }
-  }
+}
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const categoryFilter = document.getElementById("categoryFilter");
-    const priceFilter = document.getElementById("priceFilter");
-    const searchInput = document.getElementById("searchInput");
-    const productGrid = document.getElementById("productGrid");
-    const products = productGrid.querySelectorAll(".product-card");
+document.addEventListener("DOMContentLoaded", () => {
+  const categoryFilter = document.getElementById("categoryFilter");
+  const priceFilter = document.getElementById("priceFilter");
+  const searchInput = document.getElementById("searchInput");
+  const productGrid = document.getElementById("productGrid");
+  const products = productGrid.querySelectorAll(".product-card");
+  const cartToast = document.getElementById("cart-toast");
 
-    function applyFilters() {
-      const selectedCategory = categoryFilter.value;
-      const selectedPrice = priceFilter.value;
-      const searchText = searchInput.value.trim().toLowerCase();
+  // 🧩 Filter Logic
+  function applyFilters() {
+    const selectedCategory = categoryFilter.value;
+    const selectedPrice = priceFilter.value;
+    const searchText = searchInput.value.trim().toLowerCase();
 
-      products.forEach(product => {
-        const productCategory = product.getAttribute("data-category");
-        const productPrice = parseFloat(product.getAttribute("data-price"));
-        const productTitle = product.getAttribute("data-title");
+    products.forEach(product => {
+      const category = product.dataset.category;
+      const price = parseFloat(product.dataset.price);
+      const title = product.dataset.title;
+      let show = true;
 
-        let show = true;
-
-        // 🏷️ Category filter
-        if (selectedCategory !== "all" && productCategory !== selectedCategory) {
-          show = false;
-        }
-
-        // 💰 Price filter
-        if (selectedPrice !== "all") {
+      if (selectedCategory !== "all" && category !== selectedCategory) show = false;
+      if (selectedPrice !== "all") {
+        if (selectedPrice.includes("+")) {
+          const min = parseFloat(selectedPrice);
+          if (price < min) show = false;
+        } else {
           const [min, max] = selectedPrice.split("-");
-          if (selectedPrice.includes("+")) {
-            if (productPrice < parseFloat(selectedPrice)) show = false;
-          } else {
-            if (productPrice < parseFloat(min) || productPrice > parseFloat(max)) show = false;
-          }
+          if (price < parseFloat(min) || price > parseFloat(max)) show = false;
         }
+      }
+      if (searchText && !title.includes(searchText)) show = false;
 
-        // 🔍 Search filter
-        if (searchText && !productTitle.includes(searchText)) {
-          show = false;
+      product.style.display = show ? "flex" : "none";
+    });
+  }
+
+  categoryFilter.addEventListener("change", applyFilters);
+  priceFilter.addEventListener("change", applyFilters);
+  searchInput.addEventListener("keyup", applyFilters);
+
+  // 🛒 Add to Cart + Cart Count Update
+  document.querySelectorAll(".add-to-cart-form").forEach(form => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      try {
+        const response = await fetch("/cart/add.js", {
+          method: "POST",
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          body: formData
+        });
+
+        if (response.ok) {
+          cartToast.classList.add("show");
+          setTimeout(() => cartToast.classList.remove("show"), 2500);
+          await updateCartCount();
+        } else {
+          alert("Something went wrong. Please try again.");
         }
-
-        product.style.display = show ? "flex" : "none";
-      });
-    }
-
-    categoryFilter.addEventListener("change", applyFilters);
-    priceFilter.addEventListener("change", applyFilters);
-    searchInput.addEventListener("keyup", applyFilters);
+      } catch (error) {
+        console.error("Add to cart failed:", error);
+      }
+    });
   });
+
+  async function updateCartCount() {
+    try {
+      const res = await fetch("/cart.js");
+      const cart = await res.json();
+      const countElement = document.getElementById("cart-count");
+      if (countElement) countElement.textContent = cart.item_count;
+    } catch (error) {
+      console.error("Failed to update cart count:", error);
+    }
+  }
+});
 </script>
 
 {% schema %}
 {
   "name": "Shop Page",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading_text",
-      "label": "Heading Text",
-      "default": "Our Products"
-    },
-    {
-      "type": "text",
-      "id": "subheading_text",
-      "label": "Subheading Text",
-      "default": "Browse and search through our collection to find your favorites."
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#f9f9f9"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#222222"
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading Color",
-      "default": "#666666"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text Alignment",
-      "default": "center",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ]
-    },
-    {
-      "type": "range",
-      "id": "section_padding",
-      "label": "Section Padding (px)",
-      "default": 60,
-      "min": 20,
-      "max": 150,
-      "step": 5
-    }
+    { "type": "text", "id": "heading_text", "label": "Heading Text", "default": "Our Products" },
+    { "type": "text", "id": "subheading_text", "label": "Subheading Text", "default": "Browse our wide range of plants and gardening essentials." },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f9f9f9" },
+    { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#222222" },
+    { "type": "color", "id": "subheading_color", "label": "Subheading Color", "default": "#666666" },
+    { "type": "select", "id": "text_alignment", "label": "Text Alignment", "default": "center", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ]},
+    { "type": "range", "id": "section_padding", "label": "Section Padding (px)", "default": 60, "min": 20, "max": 150, "step": 5 }
   ],
-  "presets": [
-    { "name": "Shop Page" }
-  ]
+  "presets": [{ "name": "Shop Page" }]
 }
 {% endschema %}
