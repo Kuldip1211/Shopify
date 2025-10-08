@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<section style="font-family:'Poppins', sans-serif; padding:60px 0;">
+  <div class="container" style="max-width:900px; margin:auto;">
+    <h2 style="font-weight:600;">Your Addresses</h2>
+
+    {% form 'customer_address', customer.new_address %}
+      {{ form.errors | default_errors }}
+
+      <label>First Name</label>
+      <input name="address[first_name]" value="{{ form.first_name }}" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ddd;">
+
+      <label>Last Name</label>
+      <input name="address[last_name]" value="{{ form.last_name }}" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ddd;">
+
+      <label>Address</label>
+      <input name="address[address1]" value="{{ form.address1 }}" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ddd;">
+
+      <label>City</label>
+      <input name="address[city]" value="{{ form.city }}" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ddd;">
+
+      <label>Country</label>
+      <select name="address[country]" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ddd;">
+        {{ all_country_option_tags }}
+      </select>
+
+      <button type="submit" style="background:#111; color:#fff; border:none; padding:10px 20px; border-radius:6px; margin-top:10px;">Save Address</button>
+    {% endform %}
+  </div>
+</section>

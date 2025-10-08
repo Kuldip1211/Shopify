@@ -1,64 +1,36 @@
-<!-- 📄 sections/login-form.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-<section class="login-section" style="font-family:'Poppins',sans-serif; padding:80px 0; background:{{ section.settings.bg_color }};">
-  <div class="container" style="max-width:500px; margin:0 auto; background:#fff; padding:40px; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.08);">
-    <h2 style="text-align:center; color:{{ section.settings.heading_color }}; margin-bottom:20px;">{{ section.settings.heading_text }}</h2>
+<section class="customer-login-section" style="font-family:'Poppins', sans-serif; padding:60px 0; background-color:#fafafa;">
+  <div class="container" style="max-width:600px; margin:auto; background:#fff; padding:40px; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,0.05);">
+
+    <h2 style="text-align:center; margin-bottom:25px; font-weight:600;">Login to Your Account</h2>
 
     {% form 'customer_login' %}
-      {% if form.errors %}
-        <div style="color:red; margin-bottom:15px;">{{ form.errors | default_errors }}</div>
-      {% endif %}
+      {{ form.errors | default_errors }}
 
       <label>Email</label>
-      <input type="email" name="customer[email]" required placeholder="Enter your email">
+      <input type="email" name="customer[email]" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
 
       <label>Password</label>
-      <input type="password" name="customer[password]" required placeholder="Enter your password">
+      <input type="password" name="customer[password]" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
 
-      <button type="submit" class="login-btn">Login</button>
+      <button type="submit" style="width:100%; padding:12px; background:#111; color:#fff; border:none; border-radius:6px; margin-top:10px; font-weight:500;">Sign In</button>
 
-      <p style="text-align:center; margin-top:15px;">
-        <a href="/account/register">Create an account</a> | 
-        <a href="/account/recover">Forgot password?</a>
-      </p>
+      <div style="text-align:center; margin-top:20px;">
+        <a href="{{ routes.account_register_url }}" style="color:#007acc; text-decoration:none;">Create Account</a> |
+        <a href="#recover" style="color:#007acc; text-decoration:none;">Forgot Password?</a>
+      </div>
     {% endform %}
+
+    <div id="recover" style="margin-top:40px;">
+      <h3>Recover Password</h3>
+      {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
+        <label>Email</label>
+        <input type="email" name="email" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
+        <button type="submit" style="width:100%; padding:12px; background:#007acc; color:#fff; border:none; border-radius:6px;">Send Reset Link</button>
+      {% endform %}
+    </div>
+
   </div>
 </section>
-
-<style>
-.login-section input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-.login-btn {
-  background: #27ae60;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  width: 100%;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
-.login-btn:hover {
-  background: #219150;
-}
-</style>
-
-{% schema %}
-{
-  "name": "Login Form",
-  "settings": [
-    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f9f9f9" },
-    { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#222222" },
-    { "type": "text", "id": "heading_text", "label": "Heading Text", "default": "Welcome Back 👋" }
-  ],
-  "presets": [{ "name": "Login Form" }]
-}
-{% endschema %}

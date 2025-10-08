@@ -1,0 +1,23 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<section style="font-family:'Poppins', sans-serif; padding:60px 0;">
+  <div class="container" style="max-width:600px; margin:auto; background:#fff; padding:40px; border-radius:12px;">
+    <h2 style="text-align:center;">Activate Your Account</h2>
+
+    {% form 'activate_customer_password' %}
+      {{ form.errors | default_errors }}
+
+      <label>Set Password</label>
+      <input type="password" name="customer[password]" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
+
+      <label>Confirm Password</label>
+      <input type="password" name="customer[password_confirmation]" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
+
+      <button type="submit" style="width:100%; padding:12px; background:#007acc; color:#fff; border:none; border-radius:6px;">Activate Account</button>
+    {% endform %}
+
+    {% form 'decline_activation' %}
+      <button type="submit" style="width:100%; margin-top:10px; background:#e74c3c; color:#fff; border:none; border-radius:6px; padding:12px;">Decline Invitation</button>
+    {% endform %}
+  </div>
+</section>

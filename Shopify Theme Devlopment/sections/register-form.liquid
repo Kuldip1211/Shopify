@@ -1,69 +1,31 @@
-<!-- 📄 sections/register-form.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-<section class="register-section" style="font-family:'Poppins',sans-serif; padding:80px 0; background:{{ section.settings.bg_color }};">
-  <div class="container" style="max-width:500px; margin:0 auto; background:#fff; padding:40px; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.08);">
-    <h2 style="text-align:center; color:{{ section.settings.heading_color }}; margin-bottom:20px;">{{ section.settings.heading_text }}</h2>
+<section class="customer-register-section" style="font-family:'Poppins', sans-serif; padding:60px 0; background-color:#fafafa;">
+  <div class="container" style="max-width:600px; margin:auto; background:#fff; padding:40px; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,0.05);">
+
+    <h2 style="text-align:center; margin-bottom:25px; font-weight:600;">Create an Account</h2>
 
     {% form 'create_customer' %}
-      {% if form.errors %}
-        <div style="color:red; margin-bottom:15px;">{{ form.errors | default_errors }}</div>
-      {% endif %}
+      {{ form.errors | default_errors }}
 
       <label>First Name</label>
-      <input type="text" name="customer[first_name]" required placeholder="Enter first name">
+      <input type="text" name="customer[first_name]" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
 
       <label>Last Name</label>
-      <input type="text" name="customer[last_name]" required placeholder="Enter last name">
+      <input type="text" name="customer[last_name]" style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
 
       <label>Email</label>
-      <input type="email" name="customer[email]" required placeholder="Enter email">
+      <input type="email" name="customer[email]" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
 
       <label>Password</label>
-      <input type="password" name="customer[password]" required placeholder="Enter password">
+      <input type="password" name="customer[password]" required style="width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:6px;">
 
-      <button type="submit" class="register-btn">Register</button>
+      <button type="submit" style="width:100%; padding:12px; background:#111; color:#fff; border:none; border-radius:6px; margin-top:10px; font-weight:500;">Create Account</button>
 
-      <p style="text-align:center; margin-top:15px;">
-        Already have an account? <a href="/account/login">Login</a>
-      </p>
+      <div style="text-align:center; margin-top:20px;">
+        <a href="{{ routes.account_login_url }}" style="color:#007acc;">Already have an account? Login</a>
+      </div>
     {% endform %}
+
   </div>
 </section>
-
-<style>
-.register-section input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-.register-btn {
-  background: #2ecc71;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  width: 100%;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
-.register-btn:hover {
-  background: #27ae60;
-}
-</style>
-
-{% schema %}
-{
-  "name": "Register Form",
-  "settings": [
-    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f9f9f9" },
-    { "type": "color", "id": "heading_color", "label": "Heading Color", "default": "#222222" },
-    { "type": "text", "id": "heading_text", "label": "Heading Text", "default": "Create Your Account 🪴" }
-  ],
-  "presets": [{ "name": "Register Form" }]
-}
-{% endschema %}
