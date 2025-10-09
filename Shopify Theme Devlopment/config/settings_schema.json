@@ -1,11 +1,22 @@
 [
-    {
-        "name" : "theme_info",
-        "theme_name": "Theme from scratch",
-        "theme_author": "Kuldeep Chudasama",
-        "theme_version": "1.0.0",
-        "theme_documentation" : "A Custome Theme built from scratch",
-        "theme_documentation_url": "",
-        "theme_support_url": ""
-    }
+  {
+    "name": "theme_info",
+    "theme_name": "Theme from scratch",
+    "theme_author": "Kuldeep Chudasama",
+    "theme_version": "1.0.0",
+    "theme_documentation": "A Custom Shopify Theme built entirely from scratch with modular Liquid sections and optimized assets.",
+    "theme_support_email": "support@kuldeepdevs.com",
+    "theme_documentation_url": "https://kuldeepdevs.github.io/theme-docs"
+  },
+  {
+    "name": "theme_resources",
+    "theme_changelog": "Initial version (v1.0.0) — includes custom hero banner, shop page, dynamic cart updates, and footer.",
+    "theme_dependencies": [
+      "Swiper.js",
+      "Google Fonts (Poppins)",
+      "Shopify Sections schema"
+    ],
+    "theme_license": "MIT",
+    "theme_repository": "https://github.com/Kuldip1211/Shopify"
+  }
 ]

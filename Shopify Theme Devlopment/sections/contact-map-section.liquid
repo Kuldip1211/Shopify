@@ -1,5 +1,4 @@
-<!-- 📄 sections/contact-map-section.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
 <section 
   id="Home-page-contact-map-section"
@@ -19,25 +18,57 @@
 
     <!-- 📞 Right Side: Contact Form -->
     <div class="contact-container fade-in-right">
-      <h2 class="contact-heading">{{ section.settings.heading }}</h2>
-      <p class="contact-subheading">{{ section.settings.subheading }}</p>
+      <h2 class="contact-heading" style="color: {{ section.settings.heading_color }};">
+        {{ section.settings.heading }}
+      </h2>
+      <p class="contact-subheading" style="color: {{ section.settings.text_color }};">
+        {{ section.settings.subheading }}
+      </p>
 
+      <!-- ✅ Shopify Contact Form -->
       {% form 'contact', class: 'contact-form' %}
+        {% if form.posted_successfully? %}
+          <p class="success-msg">{{ section.settings.success_message }}</p>
+        {% elsif form.errors %}
+          <p class="error-msg">{{ form.errors | default_errors }}</p>
+        {% endif %}
+
         <div class="form-fields">
-          <input type="text" name="contact[name]" placeholder="Your Name" required>
-          <input type="email" name="contact[email]" placeholder="Your Email" required>
-          <textarea name="contact[body]" placeholder="Your Message" rows="4" required></textarea>
-          <button type="submit">{{ section.settings.button_text }}</button>
+          <input 
+            type="text" 
+            name="contact[name]" 
+            placeholder="Your Name" 
+            required
+          >
+          <input 
+            type="email" 
+            name="contact[email]" 
+            placeholder="Your Email" 
+            required
+          >
+          <textarea 
+            name="contact[body]" 
+            placeholder="Your Message" 
+            rows="4" 
+            required
+          ></textarea>
+
+          <button 
+            type="submit" 
+            style="
+              background-color: {{ section.settings.button_bg_color }};
+              color: {{ section.settings.button_text_color }};
+            "
+            onmouseover="this.style.backgroundColor='{{ section.settings.button_hover_color }}'"
+            onmouseout="this.style.backgroundColor='{{ section.settings.button_bg_color }}'"
+          >
+            {{ section.settings.button_text }}
+          </button>
         </div>
       {% endform %}
 
-      {% if form.posted_successfully? %}
-        <p class="success-msg">{{ section.settings.success_message }}</p>
-      {% elsif form.errors %}
-        <p class="error-msg">{{ form.errors | default_errors }}</p>
-      {% endif %}
-
-      <div class="store-info">
+      <!-- 🏬 Store Information -->
+      <div class="store-info" style="color: {{ section.settings.text_color }};">
         <h3>{{ section.settings.store_heading }}</h3>
         <p><strong>📍 Address:</strong> {{ section.settings.store_address }}</p>
         <p><strong>📞 Phone:</strong> {{ section.settings.store_phone }}</p>

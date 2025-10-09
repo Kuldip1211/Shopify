@@ -57,6 +57,29 @@ window.updateCartCount = updateCartCount;
   });
 
 
+  document.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ Contact Map Section Loaded");
+
+  // Fade-in animation on scroll
+  const fadeElements = document.querySelectorAll(".fade-in-left, .fade-in-right");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationDelay = "0.1s";
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  fadeElements.forEach((el) => observer.observe(el));
+});
+
+
 //   bestseller js
 // 🧠 Optional interactivity (expand later if needed)
 document.addEventListener("DOMContentLoaded", () => {
@@ -96,4 +119,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// testinomial js 
+// footer.js
+document.addEventListener("DOMContentLoaded", () => {
+  const fadeElements = document.querySelectorAll(".shop_page-fade-up");
+
+  // 👇 Smooth fade-up animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("shop_page-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  fadeElements.forEach(el => observer.observe(el));
+});

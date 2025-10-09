@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page_title }}</title>
     {% comment %} ggogle ceptcha scipts {% endcomment %}
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer crossorigin="anonymous"></script>
 
     <!-- Global css -->
     <link href="{{ 'style.css' | asset_url }}" rel="stylesheet" type="text/css">
@@ -14,7 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- 🌈 Font Awesome (for icons) -->
-    <script src="https://kit.fontawesome.com/a2e0b3b55f.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a2e0b3b55f.js" crossorigin="anonymous" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ✅ Shopify-Optimized Testimonials Section -->
+    {{ 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' | stylesheet_tag }}
 
     <!-- Shopify Liquid placeholder for additional scripts, styles, and meta tags -->
     {{ content_for_header }}
@@ -33,7 +40,11 @@
     </footer>
 
     <!-- global Scripts -->
-    <script src="{{ 'script.js' | asset_url }}" defer></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="{{ 'scripts.js' | asset_url }}" defer></script>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+
+    <!-- ✅ Scripts (Defer added to prevent parser blocking) -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   </body>
 </html>

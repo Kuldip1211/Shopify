@@ -1,8 +1,7 @@
-<!-- 📁 sections/hero-banner.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
 <section class="hero-section" style="
-  background-image: url({{ section.settings.hero_image | img_url: '2000x' }});
+  background-image: url({{ section.settings.hero_image | image_url: width: 2000 }});
 ">
   <div class="overlay" style="background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity }});"></div>
   

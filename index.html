@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dropdown Fix</title>
+
+  <style>
+    /* Basic styling for demo */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    nav.site-navigation-dropdown {
+      background: #222;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    nav ul.menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul.menu > li {
+      border-bottom: 1px solid #333;
+      position: relative;
+    }
+
+    nav ul.menu a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 12px;
+    }
+
+    nav ul.menu a:hover {
+      background: #333;
+    }
+
+    /* Submenu styling */
+    .sub-menu {
+      display: none;
+      background: #333;
+      padding-left: 15px;
+    }
+
+    .sub-menu a {
+      padding: 10px 12px;
+      font-size: 15px;
+    }
+
+    /* Show submenu on hover for desktop */
+    @media (min-width: 769px) {
+      li.menu-item-has-children:hover > .sub-menu {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        min-width: 200px;
+        z-index: 10;
+      }
+    }
+
+    /* Show submenu when active (mobile) */
+    @media (max-width: 768px) {
+      .sub-menu.active {
+        display: block;
+      }
+
+      li.menu-item-has-children > a::after {
+        content: " ▼";
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Your original menu structure -->
+  <nav class="site-navigation-dropdown show" aria-label="Mobile menu" aria-hidden="false">
+    <ul id="menu-topnav-1" class="menu">
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-370">
+        <a href="https://advancedrailsystems.com/">HOME</a>
+      </li>
+
+      <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-379 current_page_item menu-item-has-children menu-item-394">
+        <a href="https://advancedrailsystems.com/products/" aria-current="page">PRODUCTS</a>
+        <ul class="sub-menu">
+          <li><a href="https://advancedrailsystems.com/products/ym-16-power-switch/">YM-16</a></li>
+          <li><a href="https://advancedrailsystems.com/products/hsm-17/">HSM-17</a></li>
+          <li><a href="https://advancedrailsystems.com/products/ml-18/">ML-18C</a></li>
+          <li><a href="https://advancedrailsystems.com/products/asr-23-skate-retarder/">ASR-23 SKATE RETARDER</a></li>
+          <li><a href="https://advancedrailsystems.com/products/pathfinder/">PATHFINDER</a></li>
+          <li><a href="https://advancedrailsystems.com/products/armmi/">ARMMI</a></li>
+          <li><a href="https://advancedrailsystems.com/products/led-indicators/">LED INDICATORS</a></li>
+          <li><a href="https://advancedrailsystems.com/products/solar/">SOLAR</a></li>
+        </ul>
+      </li>
+
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-395">
+        <a href="https://advancedrailsystems.com/about/">ABOUT</a>
+        <ul class="sub-menu">
+          <li><a href="https://advancedrailsystems.com/about/team/">TEAM</a></li>
+        </ul>
+      </li>
+
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-397">
+        <a href="https://advancedrailsystems.com/contact/">CONTACT</a>
+        <ul class="sub-menu">
+          <li><a href="https://advancedrailsystems.com/contact/sales/">SALES</a></li>
+          <li><a href="https://advancedrailsystems.com/contact/support/">SUPPORT</a></li>
+        </ul>
+      </li>
+
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576">
+        <a href="https://advancedrailsystems.com/news/events/">EVENTS</a>
+      </li>
+
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-403">
+        <a href="https://advancedrailsystems.com/support/">SUPPORT</a>
+        <ul class="sub-menu">
+          <li><a href="https://advancedrailsystems.com/support/documents/">DOCUMENTS</a></li>
+          <li><a href="https://advancedrailsystems.com/support/troubleshooting/">TROUBLESHOOTING</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    // ====== Mobile Submenu Toggle Fix ======
+    document.querySelectorAll('.menu-item-has-children > a').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const submenu = this.nextElementSibling;
+
+        if (window.innerWidth <= 768) { // Only on mobile
+          if (submenu && submenu.classList.contains('sub-menu')) {
+            if (!submenu.classList.contains('active')) {
+              e.preventDefault(); // Stop redirecting
+              document.querySelectorAll('.sub-menu').forEach(sub => sub.classList.remove('active'));
+              submenu.classList.add('active');
+            } else {
+              submenu.classList.remove('active'); // Close submenu if open
+            }
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

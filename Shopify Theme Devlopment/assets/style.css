@@ -12,7 +12,6 @@ body {
 }
 
 /* Home Page */
-
 /* 🌐 Header Styles */
 #Home-page-header-section {
   font-family: "Poppins", sans-serif;
@@ -260,6 +259,8 @@ body {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+
+
 /* 🌿 AnnouncementBAr Styles */
 #Home-page-announcement-section {
     font-family: 'Poppins', sans-serif;
@@ -492,6 +493,7 @@ body {
 }
 
 #Home-page-contact-map-section .contact-heading {
+  text-align: center;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 10px;
@@ -500,6 +502,7 @@ body {
 
 #Home-page-contact-map-section .contact-subheading {
   color: var(--text-color, #444);
+  text-align: center;
   margin-bottom: 25px;
   line-height: 1.6;
 }
@@ -507,13 +510,15 @@ body {
 /* ✏️ Form Fields */
 #Home-page-contact-map-section .form-fields {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 15px;
 }
 
 #Home-page-contact-map-section .form-fields input,
 #Home-page-contact-map-section .form-fields textarea {
-  width: 100%;
+  width: 500px;
   padding: 14px 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -542,7 +547,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
+  width: 300px;
 }
 
 #Home-page-contact-map-section .form-fields button:hover {
@@ -550,18 +555,13 @@ body {
   transform: translateY(-2px);
 }
 
-/* 🏢 Store Info */
-#Home-page-contact-map-section .store-info {
-  margin-top: 30px;
-  color: var(--text-color, #444);
-  line-height: 1.6;
-}
 
 #Home-page-contact-map-section .store-info h3 {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 10px;
   color: var(--heading-color, #111);
+    padding: 30px;
 }
 
 /* ✅ Feedback Messages */
@@ -592,70 +592,97 @@ body {
   }
 }
 
-/* 📱 Responsive - Mobile Friendly Fix */
-@media (max-width: 900px) {
+/* 📱 Responsive */
+/* 📱 Responsive */
+@media (max-width: 1024px) {
   #Home-page-contact-map-section .container {
     flex-direction: column;
-    gap: 30px;
-    padding: 0 15px;
+    gap: 40px;
   }
 
-  /* 🧩 Contact form full-width */
+  #Home-page-contact-map-section .map-container,
   #Home-page-contact-map-section .contact-container {
     flex: 1 1 100%;
-    padding: 25px 20px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-  }
-
-  #Home-page-contact-map-section .contact-heading {
-    font-size: 1.6rem;
-    text-align: center;
-  }
-
-  #Home-page-contact-map-section .contact-subheading {
-    font-size: 0.95rem;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  /* ✅ Make map clearly visible */
-  #Home-page-contact-map-section .map-container {
-    height: 55vh;
-    min-height: 320px;
-    max-height: 500px;
-    border-radius: 14px;
-    order: 2;
-  }
-
-  #Home-page-contact-map-section .map-container iframe {
     width: 100%;
-    height: 500px;
-    display: block;
     border-radius: 14px;
+  }
+
+  #Home-page-contact-map-section .map-container {
+    height: 400px;
+    order: 2;
   }
 
   #Home-page-contact-map-section .contact-container {
     order: 1;
+    padding: 30px 25px;
+  }
+
+  #Home-page-contact-map-section .contact-heading {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  #Home-page-contact-map-section .contact-subheading {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 20px;
   }
 
   #Home-page-contact-map-section .form-fields input,
   #Home-page-contact-map-section .form-fields textarea {
-    font-size: 0.90rem;
-    width: 300px;
-    padding: 12px 14px;
+    width: 100%;
+    max-width: 100%;
   }
 
   #Home-page-contact-map-section .form-fields button {
-    font-size: 1rem;
-    padding: 14px;
-  }
-
-  #Home-page-contact-map-section .store-info {
-    font-size: 0.9rem;
-    margin-top: 20px;
+    width: 100%;
+    max-width: 100%;
   }
 }
+
+/* 📱 Small Devices (phones) */
+@media (max-width: 600px) {
+  #Home-page-contact-map-section {
+    padding: 8px 0;
+  }
+
+  #Home-page-contact-map-section .contact-container {
+    padding: 8px 0px;
+  }
+
+  #Home-page-contact-map-section .contact-heading {
+    font-size: 1.5rem;
+  }
+
+  #Home-page-contact-map-section .contact-subheading {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  #Home-page-contact-map-section .form-fields {
+    gap: 12px;
+  }
+
+  #Home-page-contact-map-section .form-fields input,
+  #Home-page-contact-map-section .form-fields textarea {
+    padding: 12px;
+    width: 300px;
+    font-size: 0.95rem;
+  }
+
+  #Home-page-contact-map-section .form-fields button {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    width: 200px;
+  }
+
+   #Home-page-contact-map-section .map-container {
+    height: 400px;
+    order: 2;
+  }
+}
+
+
 
 
 
@@ -825,3 +852,104 @@ body {
       padding: 20px;
     }
   }
+
+
+  .shop_page-footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  padding: 0 20px;
+}
+
+.shop_page-footer-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.shop_page-footer-text {
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.shop_page-footer-contact {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+/* 🔗 Quick Links */
+.shop_page-footer-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.shop_page-footer-list li {
+  margin: 8px 0;
+}
+
+.shop_page-footer-list a {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.shop_page-footer-list a:hover {
+  color: var(--shop_page-accent, #4CAF50);
+  transform: translateX(5px);
+}
+
+/* 🌐 Social Icons */
+.shop_page-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.shop_page-social-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.shop_page-social-icon:hover img {
+  transform: scale(1.1);
+  filter: grayscale(0);
+}
+
+/* 🌍 Bottom Footer */
+.shop_page-footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+/* ✨ Animation */
+.shop_page-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: shop_page-fadeUp 1s ease forwards;
+}
+
+@keyframes shop_page-fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .shop_page-footer-container {
+    text-align: center;
+  }
+  .shop_page-social-icons {
+    justify-content: center;
+  }
+}

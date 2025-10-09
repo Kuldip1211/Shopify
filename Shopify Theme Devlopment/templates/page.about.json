@@ -12,22 +12,20 @@
     "about": {
       "type": "about-page",
       "blocks": {
-        "team_member_zgCHck": {
-          "type": "team_member",
+        "value_card_1": {
+          "type": "value_card",
           "settings": {
-            "photo": "shopify://shop_images/welcome-to-my-business.jpg",
-            "name": "Kuldeep Chudasama",
-            "role": "Founder & Gardener",
-            "bio": "Nature lover and plant enthusiast dedicated to making the world greener, one home at a time."
+            "icon": "shopify://shop_images/eco-friendly.png",
+            "title": "Sustainability",
+            "description": "We believe in sustainable and organic gardening practices for a greener tomorrow."
           }
         },
-        "team_member_ECDKJJ": {
-          "type": "team_member",
+        "value_card_2": {
+          "type": "value_card",
           "settings": {
-            "photo": "shopify://shop_images/hard-work-pays-off.jpg",
-            "name": "Kuldeep Chudasama",
-            "role": "Founder & Gardener",
-            "bio": "Nature lover and plant enthusiast dedicated to making the world greener, one home at a time."
+            "icon": "shopify://shop_images/community.png",
+            "title": "Community",
+            "description": "Our community is at the heart of everything we do — nurturing togetherness through plants."
           }
         },
         "why_point_VP8tk8": {
@@ -42,25 +40,45 @@
           "type": "why_point",
           "settings": {
             "icon": "shopify://shop_images/fast-delivery.png",
-            "title": "Healthy, Handpicked Plants",
-            "text": "Each plant is carefully selected and nurtured to ensure quality and freshness."
+            "title": "Fast & Safe Delivery",
+            "text": "We make sure your plants reach your doorstep safely and in perfect condition."
           }
         },
         "why_point_pAgrG6": {
           "type": "why_point",
           "settings": {
             "icon": "shopify://shop_images/customer-support.png",
-            "title": "Healthy, Handpicked Plants",
-            "text": "Each plant is carefully selected and nurtured to ensure quality and freshness."
+            "title": "Dedicated Support",
+            "text": "Our team is always ready to help you with any plant care or order-related questions."
+          }
+        },
+        "team_member_1": {
+          "type": "team_member",
+          "settings": {
+            "photo": "shopify://shop_images/welcome-to-my-business.jpg",
+            "name": "Kuldeep Chudasama",
+            "role": "Founder & Gardener",
+            "bio": "Nature lover and plant enthusiast dedicated to making the world greener, one home at a time."
+          }
+        },
+        "team_member_2": {
+          "type": "team_member",
+          "settings": {
+            "photo": "shopify://shop_images/hard-work-pays-off.jpg",
+            "name": "Priya Sharma",
+            "role": "Plant Care Specialist",
+            "bio": "Ensures every plant you receive is healthy, vibrant, and nurtured with love."
           }
         }
       },
       "block_order": [
-        "team_member_zgCHck",
-        "team_member_ECDKJJ",
+        "value_card_1",
+        "value_card_2",
         "why_point_VP8tk8",
         "why_point_VidL8T",
-        "why_point_pAgrG6"
+        "why_point_pAgrG6",
+        "team_member_1",
+        "team_member_2"
       ],
       "settings": {
         "hero_image": "shopify://shop_images/palm-trees-sky.jpg",

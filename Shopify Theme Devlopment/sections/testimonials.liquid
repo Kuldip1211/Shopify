@@ -1,11 +1,4 @@
-<!-- 📁 sections/testimonials-carousel.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ✅ Swiper CSS -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
 
 <section class="testimonials-carousel" style="background-color: {{ section.settings.bg_color }};">
   <div class="container">
@@ -23,7 +16,13 @@
             <div class="testimonial-card">
               {% if block.settings.image != blank %}
                 <div class="testimonial-avatar">
-                  <img src="{{ block.settings.image | image_url: width: 100 }}" alt="{{ block.settings.customer_name }}">
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 100, height: 100 }}" 
+                    alt="{{ block.settings.customer_name }}" 
+                    width="100" 
+                    height="100" 
+                    loading="lazy"
+                  >
                 </div>
               {% endif %}
               <p class="testimonial-message">“{{ block.settings.message }}”</p>
@@ -51,11 +50,9 @@
   </div>
 </section>
 
-<!-- ✅ Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/a2e0b3b55f.js" crossorigin="anonymous"></script>
 
-<script>
+
+<script defer>
   document.addEventListener("DOMContentLoaded", () => {
     new Swiper(".testimonialsSwiper", {
       loop: true,

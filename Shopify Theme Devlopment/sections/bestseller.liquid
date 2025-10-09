@@ -1,21 +1,24 @@
 <!-- 📁 sections/featured-collection.liquid -->
 <section id="Home-page-featured-collection" class="featured-collection">
   <div class="collection-container">
-    <!--  Section Title -->
+    <!-- Section Title -->
     <div class="collection-header" style="text-align: {{ section.settings.text_alignment }};">
       <h2 class="collection-title" style="color: {{ section.settings.title_color }};">
         {{ section.settings.title }}
       </h2>
 
       {% if section.settings.show_view_all %}
-        <a href="{{ section.settings.collection | link_to }}" class="view-all-btn" 
-           style="color: {{ section.settings.button_text_color }}; border-color: {{ section.settings.button_text_color }};">
+        <a
+          href="{{ section.settings.collection | link_to }}"
+          class="view-all-btn"
+          style="color: {{ section.settings.button_text_color }}; border-color: {{ section.settings.button_text_color }};"
+        >
           {{ section.settings.button_text }}
         </a>
       {% endif %}
     </div>
 
-    <!--  Collection Grid -->
+    <!-- Collection Grid -->
     {% if section.settings.collection != blank %}
       {% assign collection = collections[section.settings.collection] %}
       <div class="collection-grid">
@@ -24,7 +27,16 @@
             <a href="{{ product.url }}" class="product-link">
               <div class="product-image-wrapper">
                 {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: '500x' }}" alt="{{ product.title }}" class="product-image">
+                  <img
+                    src="{{ product.featured_image | image_url: width: 500 }}"
+                    alt="{{ product.title | escape }}"
+                    width="500"
+                    height="500"
+                    class="product-image"
+                    loading="lazy"
+                    style="object-fit: cover;"
+                  >
+
                 {% else %}
                   <div class="no-image">No Image</div>
                 {% endif %}
@@ -48,9 +60,6 @@
   </div>
 </section>
 
-<!-- 🌐 Linked External CSS and JS -->
-{{ 'featured-collection.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'featured-collection.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

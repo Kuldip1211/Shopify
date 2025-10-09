@@ -1,5 +1,5 @@
-<!-- 📁 sections/why-choose-us.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
 
 <section 
   id="Home-page-why_choose_us-section" 
@@ -22,7 +22,13 @@
           <!-- 🖼️ Image or Icon -->
           {% if block.settings.image != blank %}
             <div class="why_choose_us-image">
-              <img src="{{ block.settings.image | image_url: width: 300 }}" alt="{{ block.settings.title }}">
+              <img 
+                src="{{ block.settings.image | image_url: width: 300, height: 300 }}" 
+                alt="{{ block.settings.title }}"
+                width="300"
+                height="300"
+                loading="lazy"
+              >
             </div>
           {% elsif block.settings.icon != blank %}
             <div class="why_choose_us-icon" style="color: {{ section.settings.icon_color }}; font-size: {{ section.settings.icon_size }}px;">
@@ -39,9 +45,80 @@
   </div>
 </section>
 
+<style>
+  .why_choose_us-section {
+    padding: 80px 20px;
+    font-family: 'Poppins', sans-serif;
+  }
 
+  .why_choose_us-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
+  .why_choose_us-header {
+    margin-bottom: 50px;
+  }
 
+  .why_choose_us-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .why_choose_us-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+  }
+
+  .why_choose_us-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    text-align: center;
+  }
+
+  .why_choose_us-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    padding: 30px 25px;
+    transition: transform 0.3s ease;
+  }
+
+  .why_choose_us-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .why_choose_us-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .why_choose_us-icon {
+    margin-bottom: 20px;
+  }
+
+  .why_choose_us-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .why_choose_us-description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .why_choose_us-title {
+      font-size: 1.8rem;
+    }
+  }
+</style>
 
 {% schema %}
 {

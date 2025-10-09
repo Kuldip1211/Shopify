@@ -1,30 +1,18 @@
-
-<section 
-  class="page-404-section"
-  style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }}; font-family: 'Poppins', sans-serif; text-align: center; padding: 100px 20px;"
->
+<section class="page-404-section" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }}; font-family: 'Poppins', sans-serif; text-align: center; padding: 100px 20px;">
   <div class="container" style="max-width: 800px; margin: 0 auto;">
     {% if section.settings.show_animation %}
       <div class="animation-container" style="margin-bottom: 30px;">
-        <lottie-player 
-          src="https://assets2.lottiefiles.com/packages/lf20_qp1q7mct.json"
-          background="transparent"
-          speed="1"
-          style="width: 300px; height: 300px; margin: 0 auto;"
-          loop
-          autoplay
-        ></lottie-player>
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
       </div>
     {% endif %}
 
     <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 10px;">Page Not Found</h1>
-    <p style="font-size: 18px; color: #666; margin-bottom: 20px;">Oops! The page you’re looking for doesn’t exist or has been moved.</p>
+    <p style="font-size: 18px; color: #666; margin-bottom: 20px;">
+      Oops! The page you’re looking for doesn’t exist or has been moved.
+    </p>
 
-    <a href="/" class="btn" 
-       style="display: inline-block; background-color: #333; color: #fff; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 500;">
+    <a href="{{ routes.root_url }}" class="btn" style="display: inline-block; background-color: #333; color: #fff; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 500;">
       Back to Home
     </a>
   </div>
 </section>
-
-

@@ -1,5 +1,4 @@
-<!-- 📄 sections/main-product.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
 <section class="product-detail-section" style="font-family:'Poppins',sans-serif; padding:60px 0; background:{{ section.settings.bg_color }};">
   <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
@@ -10,11 +9,24 @@
       <!-- 🖼️ Product Images -->
       <div class="product-images">
         <div class="main-image">
-          <img id="mainProductImage" src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+          <img 
+            id="mainProductImage" 
+            src="{{ product.featured_image | image_url: width: 800, height: 800 }}" 
+            alt="{{ product.title }}" 
+            width="800" 
+            height="800"
+          >
         </div>
         <div class="thumbnail-gallery">
           {% for image in product.images %}
-            <img src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}" class="thumbnail" onclick="updateMainImage('{{ image | img_url: 'large' }}')">
+            <img 
+              src="{{ image | image_url: width: 150, height: 150 }}" 
+              alt="{{ product.title }}" 
+              class="thumbnail" 
+              width="150" 
+              height="150"
+              onclick="updateMainImage('{{ image | image_url: width: 800, height: 800 }}')"
+            >
           {% endfor %}
         </div>
       </div>
@@ -50,7 +62,7 @@
         {% if product.has_only_default_variant == false %}
           <div class="variants">
             <h4>Select Options:</h4>
-            <form id="productForm" method="post" action="/cart/add">
+            <form id="productForm" method="post" action="{{ routes.cart_add_url }}">
               {% for option in product.options_with_values %}
                 <label><strong>{{ option.name }}</strong></label>
                 <select name="options[{{ option.name }}]" required>
@@ -64,7 +76,7 @@
             </form>
           </div>
         {% else %}
-          <form method="post" action="/cart/add" class="single-variant-form">
+          <form method="post" action="{{ routes.cart_add_url }}" class="single-variant-form">
             <input type="hidden" name="id" value="{{ product.variants.first.id }}">
             <button type="submit" class="add-to-cart-btn">🛒 Add to Cart</button>
           </form>
@@ -194,11 +206,11 @@ function updateMainImage(url) {
 
 // 🛒 Handle Add to Cart feedback
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("form[action='/cart/add']").forEach(form => {
+  document.querySelectorAll("form[action='{{ routes.cart_add_url }}']").forEach(form => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      const res = await fetch("/cart/add.js", { method: "POST", body: data });
+      const res = await fetch("{{ routes.cart_add_url }}.js", { method: "POST", body: data });
       if (res.ok) {
         alert("✅ Product added to cart!");
       } else {
