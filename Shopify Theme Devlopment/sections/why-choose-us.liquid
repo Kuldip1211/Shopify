@@ -1,129 +1,47 @@
 <!-- 📁 sections/why-choose-us.liquid -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<section class="why-choose-us" style="background-color: {{ section.settings.bg_color }};">
-  <div class="container">
+<section 
+  id="Home-page-why_choose_us-section" 
+  class="why_choose_us-section" 
+  style="background-color: {{ section.settings.bg_color }};"
+>
+  <div class="why_choose_us-container">
     
     <!-- 🏷️ Section Header -->
-    <div class="section-header" style="text-align: {{ section.settings.text_alignment }};">
-      <h2 class="section-title" style="color: {{ section.settings.title_color }};">{{ section.settings.main_title }}</h2>
-      <p class="section-subtitle" style="color: {{ section.settings.subtitle_color }};">{{ section.settings.subtitle }}</p>
+    <div class="why_choose_us-header" style="text-align: {{ section.settings.text_alignment }};">
+      <h2 class="why_choose_us-title" style="color: {{ section.settings.title_color }};">{{ section.settings.main_title }}</h2>
+      <p class="why_choose_us-subtitle" style="color: {{ section.settings.subtitle_color }};">{{ section.settings.subtitle }}</p>
     </div>
 
     <!-- 💎 Features Grid -->
-    <div class="features-grid">
+    <div class="why_choose_us-grid">
       {% for block in section.blocks %}
-        <div class="feature-card">
+        <div class="why_choose_us-card">
 
-          <!-- 🖼️ Image has priority; fallback to icon -->
+          <!-- 🖼️ Image or Icon -->
           {% if block.settings.image != blank %}
-            <div class="feature-image">
+            <div class="why_choose_us-image">
               <img src="{{ block.settings.image | image_url: width: 300 }}" alt="{{ block.settings.title }}">
             </div>
           {% elsif block.settings.icon != blank %}
-            <div class="feature-icon" style="color: {{ section.settings.icon_color }}; font-size: {{ section.settings.icon_size }}px;">
+            <div class="why_choose_us-icon" style="color: {{ section.settings.icon_color }}; font-size: {{ section.settings.icon_size }}px;">
               <i class="{{ block.settings.icon }}"></i>
             </div>
           {% endif %}
 
           <!-- 📝 Content -->
-          <h3 class="feature-title">{{ block.settings.title }}</h3>
-          <p class="feature-description">{{ block.settings.description }}</p>
+          <h3 class="why_choose_us-card-title">{{ block.settings.title }}</h3>
+          <p class="why_choose_us-description">{{ block.settings.description }}</p>
         </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<style>
-  /* 🌟 General Styles */
-  .why-choose-us {
-    padding: 70px 20px;
-    font-family: 'Poppins', sans-serif;
-  }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
 
-  .section-header {
-    margin-bottom: 50px;
-  }
 
-  .section-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .section-subtitle {
-    font-size: 1.1rem;
-    color: #555;
-  }
-
-  /* 💎 Features Grid */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-  }
-
-  .feature-card {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
-  }
-
-  /* 🖼️ Image/Icon Styles */
-  .feature-image img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    margin-bottom: 20px;
-  }
-
-  .feature-icon {
-    margin-bottom: 20px;
-  }
-
-  /* 📝 Text Styles */
-  .feature-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333;
-  }
-
-  .feature-description {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.6;
-  }
-
-  @media (max-width: 768px) {
-    .section-title {
-      font-size: 1.8rem;
-    }
-    .section-subtitle {
-      font-size: 1rem;
-    }
-    .feature-card {
-      padding: 20px;
-    }
-  }
-</style>
-
-<!-- 🌈 Font Awesome (for icons) -->
-<script src="https://kit.fontawesome.com/a2e0b3b55f.js" crossorigin="anonymous"></script>
 
 {% schema %}
 {

@@ -2,16 +2,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <section 
-  class="contact-map-section" 
-  style="background-color: {{ section.settings.bg_color }}; font-family: 'Poppins', sans-serif; padding: 80px 0; overflow: hidden;"
+  id="Home-page-contact-map-section"
+  class="contact-map-section"
+  style="background-color: {{ section.settings.bg_color }}; font-family: 'Poppins', sans-serif;"
 >
-  <div class="container" style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: stretch;">
-
+  <div class="container">
+    
     <!-- 🗺️ Left Side: Google Map -->
     <div class="map-container fade-in-left">
       <iframe 
         src="{{ section.settings.map_embed_url }}" 
-        allowfullscreen="" 
+        allowfullscreen 
         loading="lazy"
       ></iframe>
     </div>
@@ -44,138 +45,8 @@
       </div>
     </div>
   </div>
-
-  <style>
-    /* 🗺️ Map Styling */
-    .map-container {
-      flex: 1 1 48%;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-      min-height: 460px;
-    }
-
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-      border-radius: 16px;
-    }
-
-    /* 📞 Contact Box */
-    .contact-container {
-      flex: 1 1 48%;
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .contact-heading {
-      font-size: 2rem;
-      font-weight: 700;
-      color: {{ section.settings.heading_color }};
-      margin-bottom: 10px;
-    }
-
-    .contact-subheading {
-      color: {{ section.settings.text_color }};
-      margin-bottom: 25px;
-    }
-
-    .form-fields input,
-    .form-fields textarea {
-      width: 100%;
-      margin: 10px;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .form-fields input:focus,
-    .form-fields textarea:focus {
-      border-color: {{ section.settings.button_bg_color }};
-      box-shadow: 0 0 4px {{ section.settings.button_bg_color }};
-    }
-
-    .form-fields button {
-      background-color: {{ section.settings.button_bg_color }};
-      color: {{ section.settings.button_text_color }};
-      border: none;
-      padding: 14px 25px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      width: 100%;
-    }
-
-    .form-fields button:hover {
-      background-color: {{ section.settings.button_hover_color }};
-      transform: scale(1.03);
-    }
-
-    .success-msg {
-      margin-top: 15px;
-      color: green;
-      font-weight: 600;
-    }
-
-    .error-msg {
-      margin-top: 15px;
-      color: red;
-    }
-
-    /* 🏢 Store Info */
-    .store-info {
-      margin-top: 30px;
-      color: {{ section.settings.text_color }};
-    }
-
-    .store-info h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: {{ section.settings.heading_color }};
-    }
-
-    /* ✨ Animation */
-    .fade-in-left, .fade-in-right {
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 📱 Responsive */
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-      }
-      .map-container, .contact-container {
-        flex: 1 1 100%;
-      }
-      .map-container {
-        height: 350px;
-        order: 2;
-      }
-      .contact-container {
-        order: 1;
-      }
-    }
-  </style>
 </section>
+
 
 {% schema %}
 {
