@@ -760,3 +760,12 @@ loading="lazy" alt="{{ product.title }}"&gt;</code></pre></li>
   <b>Project:</b> Shopify Theme Development<br>
   <b>Last Updated:</b> October 2025
 </p>
+
+Task #360349
+8.5 hrs
+Shopify Intermediate Concept
+    Shopify Admin Activities
+    Liquid Templating Language
+    Familiarity with Developer tools
+    Performance Optimization
+    Familiarity with Shopify APIs

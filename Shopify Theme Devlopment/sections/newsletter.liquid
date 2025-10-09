@@ -33,7 +33,7 @@
           style="padding: 14px 20px; border-radius: 8px; border: 1px solid #ccc; width: 300px; max-width: 100%; font-size: 1rem; outline: none;"
         >
         <!-- ✅ Hidden field for reCAPTCHA token -->
-        <input type="hidden" name="g-recaptcha-response" id="recaptchaToken">
+
         <button
           type="submit"
           style="padding: 14px 25px; border: none; border-radius: 8px; background-color: {{ section.settings.button_bg_color }}; color: {{ section.settings.button_text_color }}; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s;"
@@ -54,17 +54,11 @@
   <div class="floating-circle circle1"></div>
   <div class="floating-circle circle2"></div>
 
-  <script src="https://www.google.com/recaptcha/api.js?render=6Lfaw-IrAAAAAM-eVdQR3P90ITMzKwXE3QqbGAZ8"></script>
-
+  <script src="https://www.google.com/recaptcha/api.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      grecaptcha.ready(function () {
-        // ✅ Executes reCAPTCHA v3 and gets a token for the "newsletter" action
-        grecaptcha.execute('6Lfaw-IrAAAAAM-eVdQR3P90ITMzKwXE3QqbGAZ8', { action: 'newsletter' }).then(function (token) {
-          document.getElementById('recaptchaToken').value = token;
-        });
-      });
-    });
+    function onSubmit(token) {
+      document.getElementById('demo-form').submit();
+    }
   </script>
 
   <style>
