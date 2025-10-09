@@ -2,91 +2,114 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <div
+  id="Home-page-announcement-section"
   class="announcement-bar"
   style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};"
 >
-  <marquee
-    behavior="scroll"
-    direction="left"
-    scrollamount="6"
-    onmouseover="this.stop();"
-    onmouseout="this.start();"
-  >
-    <div class="announcement-container">
-      <div class="annouc-container">
-        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
-      </div>
-      <div class="annouc-container">
-        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
-      </div>
-      <div class="annouc-container">
-        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
-      </div>
-      <div class="annouc-container">
-        <p class="announcement-text">{{ section.settings.announcement_text }}</p>
-      </div>
+  <div class="scrolling-text-container">
+    <div class="scrolling-text">
+      <span>{{ section.settings.announcement_text }}</span>
+      <span>{{ section.settings.announcement_text }}</span>
+      <span>{{ section.settings.announcement_text }}</span>
+      <span>{{ section.settings.announcement_text }}</span>
     </div>
-  </marquee>
+  </div>
 </div>
 
 <style>
-  .annouc-container {
-    width: 400px;
-  }
-
-  .announcement-bar {
+  /* 🌿 AnnouncementBAr Styles */
+  #Home-page-announcement-section {
     font-family: 'Poppins', sans-serif;
-    padding: 10px 0;
     text-align: center;
-    transition: background-color 0.3s ease;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
   }
 
-  .announcement-container {
-    margin: 0 auto;
-    padding: 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+  /* 🌀 Modern Scrolling Text (Marquee Replacement) */
+  #Home-page-announcement-section .scrolling-text-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
   }
 
-  .announcement-text {
+  #Home-page-announcement-section .scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scrollLeft 20s linear infinite;
+  }
+
+  #Home-page-announcement-section .scrolling-text span {
+    display: inline-block;
+    margin-right: 80px;
     font-size: 0.95rem;
     font-weight: 500;
-    margin: 0;
   }
 
-  .announcement-btn {
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* 🛒 Button */
+  #Home-page-announcement-section .announcement-btn {
+    display: inline-block;
     text-decoration: none;
-    padding: 7px 16px;
+    padding: 7px 18px;
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 600;
-    transition: 0.3s ease;
+    margin-top: 6px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
   }
 
-  .announcement-btn:hover {
+  #Home-page-announcement-section .announcement-btn:hover {
     opacity: 0.85;
+    transform: translateY(-1px);
   }
 
+  /* 📱 Responsive */
   @media (max-width: 768px) {
-    .announcement-container {
-      flex-direction: flex;
-      text-align: center;
-      gap: 8px;
+    #Home-page-announcement-section {
+      padding: 8px 0;
     }
 
-    .announcement-text {
-      font-size: 0.9rem;
-    }
-
-    .announcement-btn {
+    #Home-page-announcement-section .scrolling-text span {
       font-size: 0.85rem;
+      margin-right: 40px;
+    }
+
+    #Home-page-announcement-section .announcement-btn {
+      font-size: 0.8rem;
       padding: 6px 14px;
+      margin-top: 5px;
     }
   }
 </style>
+
+<script>
+  // 🧠 Optional JS enhancement for dynamic pause on hover
+  document.addEventListener("DOMContentLoaded", () => {
+    const scrollText = document.querySelector(
+      "#Home-page-announcement-section .scrolling-text"
+    );
+
+    if (scrollText) {
+      scrollText.addEventListener("mouseover", () => {
+        scrollText.style.animationPlayState = "paused";
+      });
+      scrollText.addEventListener("mouseout", () => {
+        scrollText.style.animationPlayState = "running";
+      });
+    }
+  });
+</script>
 
 {% schema %}
 {
@@ -96,7 +119,7 @@
       "type": "text",
       "id": "announcement_text",
       "label": "Announcement text",
-      "default": "🎉 Free shipping on orders over ₹500!"
+      "default": "🎉 Free shipping on orders over ₹500! Shop now and grow happiness 🌿"
     },
     {
       "type": "checkbox",

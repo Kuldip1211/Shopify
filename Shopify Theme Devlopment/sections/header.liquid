@@ -1,9 +1,6 @@
-<!-- 📁 sections/header.liquid -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<nav class="site-header">
+<!-- 🧭 Global Header Section -->
+<nav id="Home-page-header-section" class="site-header">
   <div class="header-container">
-    
     <!-- 🏷️ Left: Shop Title -->
     <div class="logo">
       <a href="{{ routes.root_url }}">{{ shop.name }}</a>
@@ -11,18 +8,26 @@
 
     <!-- 🧭 Center: Navigation Links -->
     <ul class="nav-links" id="navLinks">
-      {% for link in linklists.main-menu.links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% for link in linklists['main-menu'].links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
       {% endfor %}
     </ul>
 
     <!-- 🛒 Right: Profile & Cart Icons -->
     <div class="header-icons">
-      
       <!-- 👤 Profile / Auth Dropdown -->
       <div class="profile-dropdown">
         <button class="icon-link profile-btn" id="profileBtn">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <circle cx="12" cy="7" r="4"/>
             <path d="M5.5 21a7.5 7.5 0 0 1 13 0"/>
           </svg>
@@ -30,7 +35,6 @@
 
         <!-- 📋 Dropdown Menu -->
         <div class="profile-menu" id="profileMenu">
-
           {% if customer %}
             <!-- 🧍 If user is logged in -->
             <a href="/account" class="menu-item full-row">👤 {{ customer.first_name | default: 'My Profile' }}</a>
@@ -46,7 +50,7 @@
 
             <div class="menu-row">
               <a href="/pages/register" class="menu-item flex-btn">🪴 Register</a>
-              <a class="menu-item flex-btn" href="/pages/login">/pages/registe</a>
+              <a class="menu-item flex-btn" href="/pages/login">🔁 Sign In</a>
             </div>
           {% endif %}
         </div>
@@ -54,7 +58,14 @@
 
       <!-- 🛒 Cart Icon with Count Badge -->
       <a href="/cart" class="icon-link cart-link">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <circle cx="9" cy="21" r="1"/>
           <circle cx="20" cy="21" r="1"/>
           <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -63,274 +74,10 @@
       </a>
 
       <!-- 🍔 Mobile Menu -->
-      <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
   </div>
 </nav>
-
-<style>
-  nav.site-header {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fff;
-    border-bottom: 1px solid #eaeaea;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .logo a {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #333;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-
-  .nav-links a:hover {
-    color: #2ecc71;
-  }
-
-  .header-icons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .icon-link {
-    color: #333;
-    display: flex;
-    align-items: center;
-    position: relative;
-    transition: color 0.3s ease;
-  }
-
-  .icon-link:hover {
-    color: #2ecc71;
-  }
-
-  .icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  /* 🛒 Cart Count Badge */
-  .cart-count-badge {
-    position: absolute;
-    top: -6px;
-    right: -10px;
-    background-color: #27ae60;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 50%;
-    padding: 3px 7px;
-    text-align: center;
-    line-height: 1;
-  }
-
-  /* 👤 Profile Dropdown */
-  .profile-dropdown {
-    position: relative;
-  }
-
-  .profile-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .profile-menu {
-    position: absolute;
-    top: 38px;
-    right: 0;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    display: none;
-    flex-direction: column;
-    min-width: 180px;
-    overflow: hidden;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .profile-menu.show {
-    display: flex;
-  }
-
-  .menu-item {
-    padding: 10px 15px;
-    color: #333;
-    text-decoration: none;
-    font-size: 14px;
-    text-align: center;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .menu-item:hover {
-    background-color: #27ae60;
-    color: #fff;
-  }
-
-  .logout:hover {
-    background-color: #e74c3c;
-  }
-
-  /* 🧱 Row Layout */
-  .full-row {
-    border-bottom: 1px solid #eee;
-  }
-
-  .menu-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    padding: 8px;
-  }
-
-  .flex-btn {
-    flex: 1;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    margin: 0;
-  }
-
-  .flex-btn:hover {
-    background-color: #27ae60;
-    color: white;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* 🍔 Hamburger Menu */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-  }
-
-  .hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-  }
-
-  /* 📱 Responsive */
-  @media (max-width: 900px) {
-    .nav-links {
-      position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      background-color: #fff;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
-      display: none;
-      border-top: 1px solid #eaeaea;
-    }
-
-    .nav-links.active {
-      display: flex;
-    }
-
-    .hamburger {
-      display: flex;
-    }
-
-    .header-container {
-      padding: 15px 20px;
-    }
-
-    .profile-menu {
-      top: 45px;
-      right: 0;
-      min-width: 160px;
-    }
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
-</style>
-
-<script>
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("navLinks");
-  const profileBtn = document.getElementById("profileBtn");
-  const profileMenu = document.getElementById("profileMenu");
-
-  // 🍔 Toggle mobile nav
-  hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-    hamburger.classList.toggle("active");
-  });
-
-  // 👤 Toggle Profile Dropdown
-  profileBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    profileMenu.classList.toggle("show");
-  });
-
-  // Hide menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
-      profileMenu.classList.remove("show");
-    }
-  });
-
-  // 🛒 Dynamic cart count
-  async function updateCartCount() {
-    try {
-      const res = await fetch('/cart.js');
-      const cart = await res.json();
-      const cartCountEl = document.getElementById('cart-count');
-      if (cartCountEl) {
-        cartCountEl.textContent = cart.item_count;
-      }
-    } catch (error) {
-      console.error('Cart update failed:', error);
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", updateCartCount);
-  window.updateCartCount = updateCartCount;
-</script>
 
 {% schema %}
 {
