@@ -1,0 +1,162 @@
+{% layout none %}
+
+<style>
+  /* 🌿 Garden-Themed Account Dashboard */
+  .container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e6f4ea, #f3fff7);
+    border-radius: 16px;
+  }
+
+  .account-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .account-header h2 {
+    font-size: 28px;
+    color: #26734d;
+    font-weight: 700;
+  }
+
+  .account-header p {
+    color: #5f6f64;
+    font-size: 16px;
+  }
+
+  .account-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  .account-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(94, 173, 115, 0.15);
+    border: 1.5px solid #d9f3e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .account-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(61, 155, 101, 0.2);
+  }
+
+  .account-card h3 {
+    color: #26734d;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .account-card p,
+  .account-card li {
+    font-size: 14px;
+    color: #3c4a40;
+    line-height: 1.6;
+  }
+
+  .account-card a {
+    color: #3ca374;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .account-card a:hover {
+    text-decoration: underline;
+  }
+
+  .logout-btn {
+    display: inline-block;
+    margin: 40px auto 10px;
+    padding: 12px 24px;
+    background: #3ca374;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    text-align: center;
+  }
+
+  .logout-btn:hover {
+    background: #338a62;
+    transform: translateY(-2px);
+  }
+
+  /* 🌱 Responsive */
+  @media (max-width: 768px) {
+    .container {
+      margin: 20px;
+      padding: 20px 15px;
+    }
+
+    .account-header h2 {
+      font-size: 24px;
+    }
+
+    .account-card {
+      padding: 20px;
+    }
+
+    .logout-btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="account-header">
+    <h2>Hello, {{ customer.first_name }} 👋</h2>
+    <p>Welcome back to your green dashboard 🌿</p>
+  </div>
+
+  <div class="account-sections">
+    <!-- Personal Info -->
+    <div class="account-card">
+      <h3>Your Details</h3>
+      <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
+      <p><strong>Email:</strong> {{ customer.email }}</p>
+    </div>
+
+    <!-- Orders -->
+    <div class="account-card">
+      <h3>Your Orders</h3>
+      {% if customer.orders_count > 0 %}
+        <ul>
+          {% for order in customer.orders %}
+            <li>
+              <a href="{{ order.status_url }}">Order {{ order.name }}</a> — {{ order.created_at | date: "%b %d, %Y" }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No orders yet 🌱</p>
+      {% endif %}
+    </div>
+
+    <!-- Addresses -->
+    <div class="account-card">
+      <h3>Addresses</h3>
+      {% if customer.default_address %}
+        <p>
+          {{ customer.default_address.address1 }}<br>
+          {{ customer.default_address.city }}, {{ customer.default_address.province }}<br>
+          {{ customer.default_address.country }} - {{ customer.default_address.zip }}
+        </p>
+      {% else %}
+        <p>No address saved yet 🌸</p>
+      {% endif %}
+      <p><a href="{{ routes.account_addresses_url }}">Manage Addresses →</a></p>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="{{ routes.account_logout_url }}" class="logout-btn">Logout</a>
+  </div>
+</div>

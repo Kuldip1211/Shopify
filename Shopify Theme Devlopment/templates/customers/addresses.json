@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-reset_password",
+      "type": "main-address",
       "settings": {
         "enable_shop_login_button": "true",
         "padding_top": 36,
