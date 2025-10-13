@@ -36,9 +36,16 @@
     margin-bottom: 25px;
     font-size: 15px;
   }
+  #customer_login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
   .form-group {
     margin-bottom: 18px;
+    width: 100%;
   }
 
   .form-group label {
@@ -48,6 +55,7 @@
     font-weight: 500;
     font-size: 14px;
   }
+
 
   .form-group input {
     width: 300px;
@@ -59,13 +67,6 @@
     font-size: 14px;
   }
 
-#customer_login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* optional — keeps fields stacked vertically */
-}
-
   .form-group input:focus {
     border-color: #3ca374;
     box-shadow: 0 0 6px rgba(61, 155, 101, 0.2);
@@ -73,7 +74,7 @@
   }
 
   .login-btn {
-    width: 100px;
+    width: 100%;
     padding: 12px;
     background: #3ca374;
     color: white;
@@ -106,17 +107,173 @@
     text-decoration: underline;
   }
 
-  /* 🌱 Responsive */
-  @media (max-width: 480px) {
+  /* 🌱 Responsive Styles */
+  @media (max-width: 768px) {
     .login-card {
+      max-width: 380px;
       padding: 30px 25px;
+    }
+    .login-card h2 {
+      font-size: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 15px;
+    }
+
+    .login-card {
+      padding: 25px 20px;
       border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(94, 173, 115, 0.1);
     }
 
     .login-card h2 {
-      font-size: 22px;
+      font-size: 20px;
+    }
+
+    .login-card p {
+      font-size: 13px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+    }
+
+    .form-group input {
+      font-size: 13px;
+      padding: 10px;
+    }
+
+    .login-btn {
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    .account-links {
+      font-size: 13px;
+      margin-top: 18px;
+    }
+
+    .modal-content {
+      width: 90%;
+      {% comment %} padding: 20px; {% endcomment %}
+    }
+
+    .modal-content h3 {
+      font-size: 18px;
+    }
+
+    .modal-content input {
+      font-size: 13px;
+    }
+
+    .modal-content button {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .toast {
+      min-width: 200px;
+      font-size: 13px;
+      padding: 10px;
     }
   }
+
+  /* 🌼 Forgot Password Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background: #ffffff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    animation: fadeInUp 0.3s ease;
+    position: relative;
+  }
+
+  @keyframes fadeInUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 25px;
+    color: #26734d;
+    cursor: pointer;
+  }
+
+  .modal-content input {
+    width: 300px;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid #bcdcc2;
+    background-color: #fafffa;
+    font-size: 14px;
+  }
+
+  .modal-content button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #3ca374;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .modal-content button:hover {
+    background-color: #338a62;
+  }
+
+  /* 🌟 Toast Notification */
+  .toast {
+    visibility: hidden;
+    min-width: 260px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 14px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.4s, bottom 0.4s;
+  }
+
+  .toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 60px;
+  }
+
+  .toast.success { background-color: #2E7D32; }
+  .toast.error { background-color: #C62828; }
 </style>
 
 <div class="container">
@@ -146,8 +303,72 @@
 
     <div class="account-links">
       <p><a href="{{ routes.account_register_url }}">Create an account</a></p>
-      <p><a href="{{ routes.account_reset_url }}">Forgot your password?</a></p>
+      <p><a href="#" id="forgotPasswordLink">Forgot your password?</a></p>
       <p><a href="{{ routes.root_url }}">← Back to Home</a></p>
     </div>
   </div>
 </div>
+
+<!-- 🌼 Forgot Password Modal -->
+<div id="forgotPasswordModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3>Forgot your password?</h3>
+    <p style="color:#555;">Enter your registered email below to receive a password reset link.</p>
+
+    {% form 'recover_customer_password' %}
+      {% if form.posted_successfully? %}
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            showToast("✅ Password reset email sent successfully!", "success");
+          });
+        </script>
+      {% elsif form.errors %}
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            showToast("❌ {{ form.errors | default_errors | strip_html }}", "error");
+          });
+        </script>
+      {% endif %}
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <button type="submit">Send Reset Link</button>
+    {% endform %}
+  </div>
+</div>
+
+<!-- 🌟 Toast Container -->
+<div id="toast" class="toast"></div>
+
+<script>
+  // Forgot Password Modal Controls
+  const modal = document.getElementById("forgotPasswordModal");
+  const link = document.getElementById("forgotPasswordLink");
+  const closeBtn = document.querySelector(".close-btn");
+
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.style.display = "block";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // 🌟 Toast Notification Function
+  function showToast(message, type = "success") {
+    const toast = document.getElementById("toast");
+    toast.className = "toast " + type;
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3500);
+  }
+</script>
