@@ -1,0 +1,22 @@
+{% comment %}
+  Chatbot App Block
+{% endcomment %}
+
+<div id="chatbot-container"></div>
+
+<script src="{{ 'chatbot.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "AI Chatbot",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "welcome_message",
+      "label": "Welcome Message",
+      "default": "Hello! How can I help you today?"
+    }
+  ]
+}
+{% endschema %}
