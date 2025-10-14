@@ -2,7 +2,7 @@
 
 client_id = "e2f430868adb3ac7001ac2ae03747c98"
 name = "Chetai"
-application_url = "https://0d2f4009ea20.ngrok-free.app"
+application_url = "https://80878465b8ae.ngrok-free.app"
 embedded = true
 
 [build]
@@ -24,10 +24,10 @@ api_version = "2026-01"
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://0d2f4009ea20.ngrok-free.app/api/auth" ]
+redirect_urls = [ "https://80878465b8ae.ngrok-free.app/api/auth" ]
 
 # ✅ Add App Proxy section
 [app_proxy]
 subpath = "chat"
 prefix = "apps"
-url = "https://0d2f4009ea20.ngrok-free.app/api/chat"
+url = "https://80878465b8ae.ngrok-free.app/api/chat"

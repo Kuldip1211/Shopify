@@ -4,7 +4,7 @@ import OpenAI from "openai";
 // ✅ Initialize OpenAI client
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
-  apiKey: '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',
+  apiKey: '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',
   defaultHeaders: {
     'HTTP-Referer': 'https://shivfarm-7778.myshopify.com/',
     'X-Title': 'shivfarm-7778', // Optional. Site title for rankings on openrouter.ai.
